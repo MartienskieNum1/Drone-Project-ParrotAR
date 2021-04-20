@@ -1,21 +1,37 @@
 "use strict";
 try {
     const arDrone = require('ar-drone');
-    const client = arDrone.createClient();
-    console.log(client);
+    const autonomy = require('ardrone-autonomy');
 
-    client.takeoff();
-    console.log(client);
-    client.after(2000, function(){
-        this.front(0.5);
+    const client = arDrone.createClient();
+    let mission  = autonomy.createMission();
+
+    mission.takeoff()
+        .zero()
+        .altitude(1)
+        .forward(2)
+        .hover(1000)
+        .right(2)
+        .hover(1000)
+        .backward(2)
+        .hover(1000)
+        .left(2)
+        .hover(1000)
+        .land();
+
+    mission.run(function (err, result) {
+        if (err) {
+            console.log("Error", err);
+            mission.client().stop();
+            mission.client().land();
+        } else {
+            console.log("mission completed");
+            process.exit(0);
+        }
     })
-    client.after(4000, function(){
-        this.stop();
-        this.land();
-        console.log(client);
-    });
+
 
 } catch (err){
     console.log("Error", err);
-    return process.exit();
+    process.exit(1);
 }
