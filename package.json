@@ -1,0 +1,19 @@
+{
+  "name": "pxl-hasselt-drone-project",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://git.ti.howest.be/maarten.de.meyere/pxl-hasselt-drone-project.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "ar-drone": "^0.3.3"
+  }
+}
