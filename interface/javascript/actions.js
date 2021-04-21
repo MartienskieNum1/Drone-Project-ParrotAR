@@ -9,8 +9,6 @@ function init() {
                             document.querySelector("#premade-moves-abort")
     
     abortButton.addEventListener('click', abort())
-
-
 }
 
 function abort() {

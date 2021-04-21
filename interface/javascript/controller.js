@@ -9,9 +9,9 @@ function init() {
 
     let abortButton = document.querySelector("#abort") !== null ?
                             document.querySelector("#abort") :
-                            document.querySelector("#premade-moves-abort")
+                            document.querySelector("#premade-moves-abort");
 
-    abortButton.addEventListener('click', abort())
+    abortButton.addEventListener('click', abort());
 
     document.querySelectorAll("#controls button, #setup > div button").forEach(button => button.addEventListener('click', addAction));
     document.querySelector("#setup > button").addEventListener('click', execute);
@@ -46,8 +46,12 @@ function execute() {
 
         let toSend = JSON.stringify(actions);
 
-        socket.emit('execute', "Testmessage");
+        socket.emit('execute', toSend);
 
         actions = [];
     }
+}
+
+function abort() {
+    socket.emit('abort', 'Mayday mayday');
 }

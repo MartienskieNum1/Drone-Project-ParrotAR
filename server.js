@@ -23,7 +23,7 @@ function acceptConnection(socket) {
     });
     socket.on('abort', (msg) => {
         console.log('Abort');
-    })
+    });
 }
 
 function onError(error) {
