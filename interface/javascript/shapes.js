@@ -38,5 +38,10 @@ function drawTriangle() {
 }
 
 function drawStar() {
-    //idk, need to figure it out
+    for (let index = 0; index < 5; index++) {
+        forward()
+        turnRight(108)
+        forward()
+        turnLeft(324)
+    }
 }
