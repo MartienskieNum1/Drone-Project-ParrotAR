@@ -14,6 +14,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "ar-drone": "^0.3.3"
+    "ar-drone": "^0.3.3",
+    "ardrone-autonomy": "^0.1.2"
   }
 }
