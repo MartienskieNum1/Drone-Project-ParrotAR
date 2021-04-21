@@ -23,7 +23,7 @@ function addAction(e) {
     let sequenceList = document.querySelector("#sequence");
 
     if ( e.target.innerText !== "Take off" || !actions.includes(e.target) || actions[actions.length-1].innerText === "Land" ) {
-        actions.push(e.target)
+        actions.push(e.target.innerHTML)
         sequenceList.innerHTML += `<li data-id="${actions.length-1}">${e.target.innerText}</li>`
     }
 
@@ -43,11 +43,17 @@ function execute() {
         document.querySelector("#abort").style.display = "inherit"
 
         document.querySelector("#sequence").innerHTML = ``;
-        
+
+        console.log(actions);
         let toSend = JSON.stringify(actions);
 
-        socket.emit('execute', "Testmessage");
+        socket.emit('execute', toSend);
 
         actions = [];
     }
+}
+
+function createShape(shape) {
+    actions.push(shape);
+    execute();
 }
