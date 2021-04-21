@@ -7,6 +7,12 @@ let actions = [];
 function init() {
     socket = io();
 
+    let abortButton = document.querySelector("#abort") !== null ?
+                            document.querySelector("#abort") :
+                            document.querySelector("#premade-moves-abort")
+
+    abortButton.addEventListener('click', abort())
+
     document.querySelectorAll("#controls button, #setup > div button").forEach(button => button.addEventListener('click', addAction));
     document.querySelector("#setup > button").addEventListener('click', execute);
 }
@@ -16,7 +22,7 @@ function addAction(e) {
 
     let sequenceList = document.querySelector("#sequence");
 
-    if ( e.target.innerText !== "Take off" || !actions.includes(e.target) ) {
+    if ( e.target.innerText !== "Take off" || !actions.includes(e.target) || actions[actions.length-1].innerText === "Land" ) {
         actions.push(e.target)
         sequenceList.innerHTML += `<li data-id="${actions.length-1}">${e.target.innerText}</li>`
     }
@@ -37,49 +43,11 @@ function execute() {
         document.querySelector("#abort").style.display = "inherit"
 
         document.querySelector("#sequence").innerHTML = ``;
-            let text = " | ";
-            actions.forEach(action => {
-            text += action.innerText + " | ";
-            doAction(action.innerText);
-        });
+
+        let toSend = JSON.stringify(actions);
 
         socket.emit('execute', "Testmessage");
 
         actions = [];
-    }
-}
-
-function doAction(actionName) {
-    switch (actionName) {
-        case "Forward":
-            console.log("forward");
-            break;
-        case "Backwards":
-            console.log("backwards");
-            break;
-        case "Left":
-            console.log("left");
-            break;
-        case "Right":
-            console.log("right");
-            break;
-        case "Turn Left":
-            console.log("turn left");
-            break;
-        case "Turn Right":
-            console.log("turn right");
-            break;
-        case "Up":
-            console.log("up");
-            break;
-        case "Down":
-            console.log("down");
-            break;
-        case "Take off":
-            console.log("take off");
-            break;
-        case "Land":
-            console.log("land");
-            break;
     }
 }

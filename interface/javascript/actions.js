@@ -60,3 +60,19 @@ function takeOff() {
 function land() {
 
 }
+
+function flip() {
+    if(Math.floor(Math.random() * 2) == 0){
+    	// forward flip
+    }else{
+        // backward flip
+    }
+}
+
+function flipRight() {
+
+}
+
+function flipLeft() {
+    
+}
