@@ -51,3 +51,8 @@ function execute() {
         actions = [];
     }
 }
+
+function createShape(shape) {
+    actions.push(shape);
+    execute();
+}
