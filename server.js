@@ -5,6 +5,7 @@ var http = require('http');
 var server = http.createServer(app);
 const { Server } = require("socket.io");
 const io = new Server(server);
+const droneManager = require('./drone-manager').create();
 
 app.use(express.static(path.join(__dirname, 'interface')));
 
@@ -20,10 +21,13 @@ function acceptConnection(socket) {
     console.log("Connection received ...");
     socket.on('execute', (msg) => {
         console.log('Execute received', msg);
+        droneManager.parseSequence();
+        droneManager.execute();
     });
     socket.on('abort', (msg) => {
         console.log('Abort');
-    });
+        droneManager.abort();
+    })
 }
 
 function onError(error) {
