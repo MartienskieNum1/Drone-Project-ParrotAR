@@ -1,11 +1,13 @@
 "use strict";
 
+let socket;
 let keysPara = document.querySelector(".keys");
 
 let flying = false;
 
 let init = () => {
     console.log("page loaded");
+    socket = io();
     document.addEventListener('keypress', navigate);
     document.addEventListener('keydown', navigateDown);
     document.addEventListener('keyup', navigateUp);
@@ -59,23 +61,26 @@ setInterval(function () { joy1Y.value=Joy1.GetY(); }, 50);
 setInterval(function () {
     let x = Joy1.GetX();
     let y = Joy1.GetY();
-    let state, speed;
+    let data = new Object();
 
     if (y > 0 && y > Math.abs(x)) {
-        state = "RightStickUp";
-        speed = y / 100;
+        data.state = "RightStickUp";
+        data.speed = y / 100;
     } else if (y < 0 && Math.abs(y) > Math.abs(x)) {
-        state = "RightStickDown";
-        speed = y / 100 * -1;
+        data.state = "RightStickDown";
+        data.speed = y / 100 * -1;
     } else if (x > 0 && x > Math.abs(y)) {
-        state = "RightStickRight";
-        speed = x / 100;
+        data.state = "RightStickRight";
+        data.speed = x / 100;
     } else if (x < 0 && Math.abs(x) < Math.abs(y)) {
-        state = "RightStickLeft";
-        speed = x / 100 * -1;
+        data.state = "RightStickLeft";
+        data.speed = x / 100 * -1;
+    } else {
+        data.state = "StickNeutral";
+        data.speed = 0;
     }
 
-    emit("executeStick", `{state: ${state}, speed: ${speed}}`)
+    emit("executeStick", JSON.stringify(data));
 
 }, 50);
 
