@@ -1,8 +1,8 @@
 h1 {
     font-size: 3rem;
     font-weight: bold;
-    margin-bottom: 10px;
-    margin-top: 50px;
+    margin-bottom: 0.5vh;
+    margin-top: 1vh;
 }
 
 aside {
@@ -12,8 +12,7 @@ aside {
 aside li {
     font-size: 2rem;
     font-family: Verdana, Geneva, Tahoma, sans-serif;
-    line-height: 60px;
-    margin-bottom: 5px;
+    line-height: 55px;
 }
 
 aside #sequence {
@@ -26,7 +25,7 @@ aside #sequence {
     display: flex;
     flex-wrap: wrap;
     justify-content: space-between;
-    height: 100vh;
+    height: 87vh;
 }
 
 #moves li {
@@ -34,15 +33,21 @@ aside #sequence {
     list-style-type: none;
     display: flex;
     justify-content: center;
-    margin-top: 50px;
+    margin-top: 2vh;
+    align-items: center;
+}
+
+#moves button {
+    width: 10vw;
+    height: 10vw;
 }
 
 #abort, #premade-moves-abort {
-    display: none;
-    margin-top: 20px;
-    transform: translateX(-30%);
-    width: 120%;
-    height: 200px;
+    position: absolute;
+    bottom: 2vh;
+    transform: translateX(-50%);
+    width: 30%;
+    height: 20vh;
     background-color: red;
     font-size: 3rem;
     font-weight: bold;
@@ -56,4 +61,10 @@ aside #sequence {
 
 #premade-moves-abort {
     display: inherit;
+}
+
+#moves p {
+    margin-left: 0.5vw;
+    min-width: 7vw;
+    font-size: 2rem;
 }

@@ -2,8 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="height=device-height, initial-scale=1.0">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width,height=device-height,initial-scale=1.0"/>
     <title>Drone controls</title>
     <link rel="stylesheet" href="css/reset.css">
     <link rel="stylesheet" href="css/general.css">
@@ -34,11 +33,11 @@
                     <button>Right</button>
                 </div>
                 <div>
-                    <button>Backwards</button>
+                    <button>Backward</button>
                 </div>
             </div>
     
-            <div id="flips">       <!-- Vertical -->
+            <div id="flips">       <!-- Flips -->
                 <div>
                     <button>Flip Left</button>
                 </div>
@@ -73,7 +72,7 @@
             <button>Execute</button>
         </div>
     </div>
-    <aside style="display: inline-block">
+    <aside>
         <h1>Sequence</h1>
     
         <ul id="sequence">
@@ -86,7 +85,6 @@
 </main>
 
 <script src="/socket.io/socket.io.js"></script>
-<script src="/javascript/actions.js"></script>
 <script src="/javascript/controller.js"></script>
 </body>
 </html>
