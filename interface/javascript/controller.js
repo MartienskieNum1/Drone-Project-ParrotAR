@@ -63,5 +63,5 @@ function addAction(actionName, parameter = null) {
 function abort(e) {
     e.preventDefault();
 
-    socket.emit("abort", 0);
+    socket.emit("abort", null);
 }
