@@ -3,6 +3,7 @@ let socket;
 document.addEventListener('DOMContentLoaded', init);
 
 let actions = [];
+let parameters = [];
 
 function init() {
     socket = io();
@@ -11,19 +12,21 @@ function init() {
                             document.querySelector("#abort") :
                             document.querySelector("#premade-moves-abort")
     
-    abortButton.addEventListener('click', abort())
+    abortButton.addEventListener('click', abort)
 
-    document.querySelectorAll("#controls button, #setup > div button").forEach(button => button.addEventListener('click', addAction));
+    document.querySelectorAll("#controls button, #setup > div button").forEach(button => button.addEventListener('click', addToSequence));
     document.querySelector("#setup > button").addEventListener('click', execute);
 }
 
-function addAction(e) {
+function addToSequence(e) {
     e.preventDefault();
 
     let sequenceList = document.querySelector("#sequence");
 
     if ( e.target.innerText !== "Take off" || !actions.includes(e.target) || actions[actions.length-1].innerText === "Land" ) {
-        actions.push(e.target.innerHTML)
+        
+        addAction(e.target.innerText, null)
+        
         sequenceList.innerHTML += `<li data-id="${actions.length-1}">${e.target.innerText}</li>`
     }
 
@@ -44,16 +47,21 @@ function execute() {
 
         document.querySelector("#sequence").innerHTML = ``;
 
-        console.log(actions);
-        let toSend = JSON.stringify(actions);
-
-        socket.emit('execute', toSend);
+        socket.emit('execute', JSON.stringify(actions));
 
         actions = [];
     }
 }
 
-function createShape(shape) {
-    actions.push(shape);
-    execute();
+function addAction(actionName, parameter = null) {
+    actions.push({
+        action: actionName,
+        param: parameter
+    })
+}
+
+function abort(e) {
+    e.preventDefault();
+
+    socket.emit("abort", 0);
 }

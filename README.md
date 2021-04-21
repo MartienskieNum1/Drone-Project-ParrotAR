@@ -1,2 +1,0 @@
-# PXL - Hasselt - Drone Project
-
