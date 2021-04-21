@@ -1,10 +1,12 @@
 'use strict';
-
+let socket;
 document.addEventListener('DOMContentLoaded', init);
 
 let actions = [];
 
 function init() {
+    socket = io();
+
     document.querySelectorAll("#controls button, #setup > div button").forEach(button => button.addEventListener('click', addAction));
     document.querySelector("#setup > button").addEventListener('click', execute);
 }
@@ -40,6 +42,8 @@ function execute() {
             text += action.innerText + " | ";
             doAction(action.innerText);
         });
+
+        socket.emit('execute', "Testmessage");
 
         actions = [];
     }

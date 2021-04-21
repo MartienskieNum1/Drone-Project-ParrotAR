@@ -10,7 +10,7 @@ function init() {
     
     abortButton.addEventListener('click', abort())
 
-    const socket = io();
+
 }
 
 function abort() {

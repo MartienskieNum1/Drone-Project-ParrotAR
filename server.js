@@ -18,6 +18,12 @@ server.on('error', onError);
 
 function acceptConnection(socket) {
     console.log("Connection received ...");
+    socket.on('execute', (msg) => {
+        console.log('Execute received', msg);
+    });
+    socket.on('abort', (msg) => {
+        console.log('Abort');
+    })
 }
 
 function onError(error) {
