@@ -18,7 +18,7 @@ aside li {
 
 aside #sequence {
     height: 60vh;
-    overflow-y: scroll;
+    overflow-y: auto;
 }
 
 #moves {
