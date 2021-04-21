@@ -12,12 +12,16 @@ function init() {
 function addAction(e) {
     e.preventDefault();
 
+    let sequenceList = document.querySelector("#sequence");
+
     if ( e.target.innerText !== "Take off" || !actions.includes(e.target) ) {
         actions.push(e.target)
-        document.querySelector("#sequence").innerHTML += `<li data-id="${actions.length-1}">${e.target.innerText}</li>`
+        sequenceList.innerHTML += `<li data-id="${actions.length-1}">${e.target.innerText}</li>`
     }
 
     document.querySelectorAll("#sequence li").forEach(action => action.addEventListener('click', removeAction));
+
+    sequenceList.scrollTop = sequenceList.scrollHeight;
 }
 
 function removeAction(e) {
@@ -27,17 +31,18 @@ function removeAction(e) {
 }
 
 function execute() {
-    console.log(document.querySelector("#abort"))
-    document.querySelector("#abort").style.display = "inherit"
-    document.querySelector("#sequence").innerHTML = ``;
-    let text = " | ";
-    actions.forEach(action => {
-        text += action.innerText + " | ";
-        doAction(action.innerText);
-    });
+    if (actions.length > 0) {
+        document.querySelector("#abort").style.display = "inherit"
 
+        document.querySelector("#sequence").innerHTML = ``;
+            let text = " | ";
+            actions.forEach(action => {
+            text += action.innerText + " | ";
+            doAction(action.innerText);
+        });
 
-    actions = [];
+        actions = [];
+    }
 }
 
 function doAction(actionName) {

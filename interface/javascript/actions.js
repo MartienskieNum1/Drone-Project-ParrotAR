@@ -3,7 +3,12 @@
 document.addEventListener('DOMContentLoaded', init);
 
 function init() {
-    document.querySelector("#abort").addEventListener('click', abort());
+
+    let abortButton = document.querySelector("#abort") !== null ?
+                            document.querySelector("#abort") :
+                            document.querySelector("#premade-moves-abort")
+    
+    abortButton.addEventListener('click', abort())
 
     const socket = io();
 }
