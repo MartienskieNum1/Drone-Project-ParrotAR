@@ -5,6 +5,12 @@ document.addEventListener('DOMContentLoaded', init);
 let actions = [];
 
 function init() {
+    let abortButton = document.querySelector("#abort") !== null ?
+                            document.querySelector("#abort") :
+                            document.querySelector("#premade-moves-abort")
+    
+    abortButton.addEventListener('click', abort())
+    
     document.querySelectorAll("#controls button, #setup > div button").forEach(button => button.addEventListener('click', addAction));
     document.querySelector("#setup > button").addEventListener('click', execute);
 }
@@ -12,12 +18,16 @@ function init() {
 function addAction(e) {
     e.preventDefault();
 
-    if ( e.target.innerText !== "Take off" || !actions.includes(e.target) ) {
+    let sequenceList = document.querySelector("#sequence");
+
+    if ( e.target.innerText !== "Take off" || !actions.includes(e.target) || actions[actions.length-1].innerText === "Land" ) {
         actions.push(e.target)
-        document.querySelector("#sequence").innerHTML += `<li data-id="${actions.length-1}">${e.target.innerText}</li>`
+        sequenceList.innerHTML += `<li data-id="${actions.length-1}">${e.target.innerText}</li>`
     }
 
     document.querySelectorAll("#sequence li").forEach(action => action.addEventListener('click', removeAction));
+
+    sequenceList.scrollTop = sequenceList.scrollHeight;
 }
 
 function removeAction(e) {
@@ -27,50 +37,13 @@ function removeAction(e) {
 }
 
 function execute() {
-    console.log(document.querySelector("#abort"))
-    document.querySelector("#abort").style.display = "inherit"
-    document.querySelector("#sequence").innerHTML = ``;
-    let text = " | ";
-    actions.forEach(action => {
-        text += action.innerText + " | ";
-        doAction(action.innerText);
-    });
+    if (actions.length > 0) {
+        document.querySelector("#abort").style.display = "inherit"
 
+        document.querySelector("#sequence").innerHTML = ``;
+        
+        let toSend = JSON.stringify(actions);
 
-    actions = [];
-}
-
-function doAction(actionName) {
-    switch (actionName) {
-        case "Forward":
-            console.log("forward");
-            break;
-        case "Backwards":
-            console.log("backwards");
-            break;
-        case "Left":
-            console.log("left");
-            break;
-        case "Right":
-            console.log("right");
-            break;
-        case "Turn Left":
-            console.log("turn left");
-            break;
-        case "Turn Right":
-            console.log("turn right");
-            break;
-        case "Up":
-            console.log("up");
-            break;
-        case "Down":
-            console.log("down");
-            break;
-        case "Take off":
-            console.log("take off");
-            break;
-        case "Land":
-            console.log("land");
-            break;
+        actions = [];
     }
 }

@@ -3,7 +3,11 @@
 document.addEventListener('DOMContentLoaded', init);
 
 function init() {
-    document.querySelector("#abort").addEventListener('click', abort())
+    let abortButton = document.querySelector("#abort") !== null ?
+                            document.querySelector("#abort") :
+                            document.querySelector("#premade-moves-abort")
+    
+    abortButton.addEventListener('click', abort())
 }
 
 function abort() {
@@ -52,4 +56,20 @@ function takeOff() {
 
 function land() {
 
+}
+
+function flip() {
+    if(Math.floor(Math.random() * 2) == 0){
+    	// forward flip
+    }else{
+        // backward flip
+    }
+}
+
+function flipRight() {
+
+}
+
+function flipLeft() {
+    
 }

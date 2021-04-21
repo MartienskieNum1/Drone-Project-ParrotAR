@@ -8,7 +8,7 @@ main > div {
     height: auto;
     margin-left: auto;
     margin-right: auto;
-    margin-top: 100px;
+    margin-top: 50px;
 }
 
 main > div > div:first-child {
@@ -17,15 +17,26 @@ main > div > div:first-child {
     margin-bottom: 50px;
 }
 
+#controls {
+    display: flex;
+    justify-content: space-around;
+}
+
 #horizontal, #vertical {
-    width: 49%;
+    width: 40%;
     display: inline-block;
 }
 
 #horizontal>div, #vertical>div {
     display: flex;
     justify-content: space-around;
-    margin-bottom: 10px;
+    margin-bottom: -5%;
+}
+
+#flips button {
+    height: 150px;
+    width: 150px;
+    margin-bottom: 15px;
 }
 
 #setup > div {
@@ -41,12 +52,14 @@ main > div > div:first-child {
     margin-left: 50%;
     transform: translateX(-50%);
     width: 300px;
+    height: 100px;
+    border-radius: 25px;
 }
 
 button {
-    width: 150px;
-    height: 120px;
+    width: 175px;
+    height: 175px;
     border: 1px solid black;
-    border-radius: 25px;
+    border-radius: 50%;
     font-size: 1.5rem;
 }
