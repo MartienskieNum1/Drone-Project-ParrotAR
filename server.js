@@ -26,7 +26,11 @@ function acceptConnection(socket) {
     socket.on('abort', () => {
         console.log('Abort');
         droneManager.abort();
-    })
+    });
+    socket.on('executeStick', (msg) => {
+       console.log('Stick Execute received', msg);
+       droneManager.executeStick(msg);
+    });
 }
 
 function onError(error) {
