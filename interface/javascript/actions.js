@@ -3,11 +3,7 @@
 document.addEventListener('DOMContentLoaded', init);
 
 function init() {
-    let abortButton = document.querySelector("#abort") !== null ?
-                            document.querySelector("#abort") :
-                            document.querySelector("#premade-moves-abort")
     
-    abortButton.addEventListener('click', abort())
 }
 
 function abort() {
