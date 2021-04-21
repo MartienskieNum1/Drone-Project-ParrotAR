@@ -1,9 +1,9 @@
-body {
+main {
     display: flex;
     justify-content: space-between;
 }
 
-main {
+main > div {
     width: 75%;
     height: auto;
     margin-left: auto;
@@ -11,7 +11,7 @@ main {
     margin-top: 100px;
 }
 
-main>div:first-child {
+main > div > div:first-child {
     display: flex;
     justify-content: space-between;
     margin-bottom: 50px;

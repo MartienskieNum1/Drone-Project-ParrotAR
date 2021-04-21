@@ -3,60 +3,73 @@
 <head>
     <meta charset="UTF-8">
     <title>Drone controls</title>
-    <link rel="stylesheet" href="reset.css">
-    <link rel="stylesheet" href="sequence.css">
-    <link rel="stylesheet" href="controls.css">
+    <link rel="stylesheet" href="css/reset.css">
+    <link rel="stylesheet" href="css/general.css">
+    <link rel="stylesheet" href="css/sequence.css">
+    <link rel="stylesheet" href="css/controls.css">
 </head>
 <body>
 
-<main  style="display: inline-block">
-    <div id="controls">       <!-- Movement -->
-        <div id="horizontal">       <!-- Horizontal -->
-            <div>
-                <button>Forward</button>
+<header>
+    <nav>
+        <ul>
+            <li><a href="index.html">Make a path</a></li>
+            <li><a href="premade-moves.html">Premade moves</a></li>
+        </ul>
+    </nav>
+</header>
+
+<main>
+    <div>
+        <div id="controls">       <!-- Movement -->
+            <div id="horizontal">       <!-- Horizontal -->
+                <div>
+                    <button>Forward</button>
+                </div>
+                <div>
+                    <button>Left</button>
+                    <button>Right</button>
+                </div>
+                <div>
+                    <button>Backwards</button>
+                </div>
             </div>
-            <div>
-                <button>Left</button>
-                <button>Right</button>
-            </div>
-            <div>
-                <button>Backwards</button>
+    
+            <div id="vertical">       <!-- Vertical -->
+                <div>
+                    <button>Up</button>
+                </div>
+                <div>
+                    <button>Turn Left</button>
+                    <button>Turn Right</button>
+                </div>
+                <div>
+                    <button>Down</button>
+                </div>
             </div>
         </div>
-
-        <div id="vertical">       <!-- Vertical -->
+    
+        <div id="setup">
             <div>
-                <button>Up</button>
+                <button>Take off</button>
+                <button>Land</button>
             </div>
-            <div>
-                <button>Turn Left</button>
-                <button>Turn Right</button>
-            </div>
-            <div>
-                <button>Down</button>
-            </div>
+    
+            <button>Execute</button>
         </div>
     </div>
-
-    <div id="setup">
-        <div>
-            <button>Take off</button>
-            <button>Land</button>
-        </div>
-
-        <button>Execute</button>
-    </div>
+    <aside style="display: inline-block">
+        <h1>Sequence</h1>
+    
+        <ul id="sequence">
+    
+        </ul>
+    </aside>
 </main>
 
-<aside style="display: inline-block">
-    <h1>Sequence</h1>
 
-    <ul id="sequence">
-
-    </ul>
-</aside>
-
-<script src="controller.js"></script>
+<script src="javascript/actions.js"></script>
+<script src="javascript/controller.js"></script>
 
 </body>
 </html>

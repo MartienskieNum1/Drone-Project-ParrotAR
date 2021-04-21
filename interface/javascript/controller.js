@@ -41,24 +41,34 @@ function execute() {
 function doAction(actionName) {
     switch (actionName) {
         case "Forward":
+            console.log("forward");
             break;
         case "Backwards":
+            console.log("backwards");
             break;
         case "Left":
+            console.log("left");
             break;
         case "Right":
+            console.log("right");
             break;
         case "Turn Left":
+            console.log("turn left");
             break;
         case "Turn Right":
+            console.log("turn right");
             break;
         case "Up":
+            console.log("up");
             break;
         case "Down":
+            console.log("down");
             break;
         case "Take off":
+            console.log("take off");
             break;
         case "Land":
+            console.log("land");
             break;
     }
 }
