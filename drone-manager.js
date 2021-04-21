@@ -9,6 +9,7 @@ function create() {
     }
 
     function execute() {
+        parseSequence();
         console.log("Executing mission...");
     }
 
@@ -16,7 +17,7 @@ function create() {
         console.log("Aborting mission...");
     }
 
-    return { parseSequence, execute, abort };
+    return { execute, abort };
 }
 
 module.exports = { create };

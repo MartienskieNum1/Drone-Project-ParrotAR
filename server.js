@@ -21,7 +21,6 @@ function acceptConnection(socket) {
     console.log("Connection received ...");
     socket.on('execute', (msg) => {
         console.log('Execute received', msg);
-        droneManager.parseSequence();
         droneManager.execute();
     });
     socket.on('abort', (msg) => {
