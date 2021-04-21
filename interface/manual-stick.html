@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="height=device-height, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Manual stick</title>
+    <link rel="stylesheet" href="css/reset.css">
+    <link rel="stylesheet" href="css/general.css">
+</head>
+<body>
+    
+<header>
+    <nav>
+        <ul>
+            <li><a href="index.html">Make a path</a></li>
+            <li><a href="premade-moves.html">Premade moves</a></li>
+            <li><a href="manual-stick.html">Manual stick</a></li>
+        </ul>
+    </nav>
+</header>
+
+<main>
+		<!-- Example of two JoyStick integrated in the page structure -->
+			<div class="columnLateral">
+				<div id="joy1Div" style="width:200px;height:200px;margin:50px"></div>
+				Posizione X:<input id="joy1PosizioneX" type="text" /><br />
+				Posizione Y:<input id="joy1PosizioneY" type="text" /><br />
+				Direzione:<input id="joy1Direzione" type="text" /><br />
+				X :<input id="joy1X" type="text" /></br>
+				Y :<input id="joy1Y" type="text" />
+			</div>		
+</main>
+
+<script src="/socket.io/socket.io.js"></script>
+<script src="/JoyStick/joy.js"></script>
+<script src="/javascript/stick.js"></script>
+
+</body>
+</html>
