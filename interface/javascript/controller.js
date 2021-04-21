@@ -1,16 +1,18 @@
 'use strict';
-
+let socket;
 document.addEventListener('DOMContentLoaded', init);
 
 let actions = [];
 
 function init() {
+    socket = io();
+
     let abortButton = document.querySelector("#abort") !== null ?
                             document.querySelector("#abort") :
                             document.querySelector("#premade-moves-abort")
     
     abortButton.addEventListener('click', abort())
-    
+
     document.querySelectorAll("#controls button, #setup > div button").forEach(button => button.addEventListener('click', addAction));
     document.querySelector("#setup > button").addEventListener('click', execute);
 }
@@ -43,6 +45,8 @@ function execute() {
         document.querySelector("#sequence").innerHTML = ``;
         
         let toSend = JSON.stringify(actions);
+
+        socket.emit('execute', "Testmessage");
 
         actions = [];
     }
