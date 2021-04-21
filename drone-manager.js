@@ -4,11 +4,21 @@ const autonomy = require('ardrone-autonomy');
 function create() {
 
 
-    function parseSequence() {
-        console.log("Parsing the sequence...");
+    function parseSequence(msg) {
+        let mission  = autonomy.createMission();
+
+        let actions = JSON.parse(msg);
+
+        for(const action of actions){
+            appendMission(mission, a.action, a.param);
+        }
+
+        return mission;
     }
 
-    function execute() {
+    function execute(msg) {
+        const mission = parseSequence(msg);
+        console.log(mission);
         console.log("Executing mission...");
     }
 
@@ -16,7 +26,42 @@ function create() {
         console.log("Aborting mission...");
     }
 
-    return { parseSequence, execute, abort };
+    function appendMission(mission, action, param){
+        switch(action){
+            case "Forward":
+                mission.forward(param);
+                break;
+            case "Backward":
+                mission.backward(param);
+                break;
+            case "Left":
+                mission.left(param);
+                break;
+            case "Right":
+                mission.right(param);
+                break;
+            case "Take off":
+                mission.takeoff();
+                break;
+            case "Land":
+                mission.land();
+                break;
+            case "Turn Left":
+                mission.ccw(param);
+                break;
+            case "Turn Right":
+                mission.cw(param);
+                break;
+            case "Up":
+                mission.up(param);
+                break;
+            case "Down":
+                mission.down(param);
+                break;
+        }
+    }
+
+    return { execute, abort };
 }
 
 module.exports = { create };
