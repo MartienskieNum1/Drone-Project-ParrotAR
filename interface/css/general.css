@@ -32,7 +32,7 @@ button {
     overflow: hidden;
 }
   
-#setup > button:after {
+#setup > button:after, #abort:after, #premade-moves-abort:after {
     content: "";
     background: #EEEEEE;
     display: block;
@@ -45,7 +45,7 @@ button {
     transition: all 0.8s
 }
   
-#setup > button:active:after {
+#setup > button:active:after, #abort:active:after, #premade-moves-abort:active:after {
     padding: 0;
     margin: 0;
     opacity: 1;

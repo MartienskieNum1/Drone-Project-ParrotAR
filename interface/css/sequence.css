@@ -16,6 +16,11 @@ aside li {
     list-style-type: circle;
 }
 
+aside #sequence {
+    height: 60vh;
+    overflow-y: auto;
+}
+
 #moves {
     width: 100vw;
     display: flex;
@@ -30,4 +35,24 @@ aside li {
     display: flex;
     justify-content: center;
     margin-top: 50px;
+}
+
+#abort, #premade-moves-abort {
+    display: none;
+    margin-top: 20px;
+    transform: translateX(-30%);
+    width: 120%;
+    height: 200px;
+    background-color: red;
+    font-size: 3rem;
+    font-weight: bold;
+    color: white;
+}
+
+#abort:after, #premade-moves-abort:after {
+    background-color: #ff7777;
+}
+
+#premade-moves-abort {
+    display: inherit;
 }

@@ -27,6 +27,8 @@ function removeAction(e) {
 }
 
 function execute() {
+    console.log(document.querySelector("#abort"))
+    document.querySelector("#abort").style.display = "inherit"
     document.querySelector("#sequence").innerHTML = ``;
     let text = " | ";
     actions.forEach(action => {
