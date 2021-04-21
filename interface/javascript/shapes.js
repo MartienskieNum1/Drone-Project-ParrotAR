@@ -9,6 +9,8 @@ function init() {
 function drawShape(e) {
     e.preventDefault()
     
+    createShape(e.target.innerText);
+
     switch (e.target.innerText) {
         case "Square":
             drawSquare()
