@@ -33,6 +33,12 @@ main > div > div:first-child {
     margin-bottom: -5%;
 }
 
+#flips button {
+    height: 150px;
+    width: 150px;
+    margin-bottom: 15px;
+}
+
 #setup > div {
     width: 30%;
     margin-left: auto;
