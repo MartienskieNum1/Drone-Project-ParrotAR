@@ -2,7 +2,7 @@ const arDrone = require('ar-drone');
 const autonomy = require('ardrone-autonomy');
 
 function create() {
-
+    const client = arDrone.createClient();
 
     function parseSequence(sequence) {
         let mission  = autonomy.createMission();
@@ -30,6 +30,7 @@ function create() {
 
     function abort() {
         console.log("Aborting mission...");
+        client.stop();
     }
 
     return { execute, abort };
