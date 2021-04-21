@@ -3,7 +3,9 @@
 document.addEventListener('DOMContentLoaded', init);
 
 function init() {
-    document.querySelector("#abort").addEventListener('click', abort())
+    document.querySelector("#abort").addEventListener('click', abort());
+
+    const socket = io();
 }
 
 function abort() {
