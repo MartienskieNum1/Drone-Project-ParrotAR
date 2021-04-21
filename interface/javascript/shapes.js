@@ -9,8 +9,6 @@ function init() {
 function drawShape(e) {
     e.preventDefault()
     
-    createShape(e.target.innerText);
-
     switch (e.target.innerText) {
         case "Square":
             drawSquare()
@@ -25,6 +23,9 @@ function drawShape(e) {
         
         case "Standing Rectangle":
             drawStandingRectangle();
+        
+        case "Pentagon":
+            drawPentagon();
     }
 
     execute()
@@ -32,14 +33,14 @@ function drawShape(e) {
 
 function drawSquare() {
     for (let index = 0; index < 4; index++) {
-        addAction("turn Right");
+        addAction("turn Left");
         addAction("forward");
     }
 }
 
 function drawTriangle() {
     for (let index = 0; index < 3; index++) {
-        addAction("turn Right", 120);
+        addAction("turn Left", 120);
         addAction("forward");
     }
 }
@@ -58,4 +59,11 @@ function drawStandingRectangle() {
     addAction("Forward");
     addAction("down", 2);
     addAction("backward");
+}
+
+function drawPentagon() {
+    for (let index = 0; index < 5; index++) {
+        addAction("Forward");
+        addAction("turn Left", 108);
+    }
 }

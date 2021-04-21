@@ -25,7 +25,7 @@ aside #sequence {
     display: flex;
     flex-wrap: wrap;
     justify-content: space-between;
-    height: 100vh;
+    height: 87vh;
 }
 
 #moves li {
@@ -34,6 +34,7 @@ aside #sequence {
     display: flex;
     justify-content: center;
     margin-top: 2vh;
+    align-items: center;
 }
 
 #moves button {
@@ -42,10 +43,10 @@ aside #sequence {
 }
 
 #abort, #premade-moves-abort {
-    display: none;
-    margin-top: 2vh;
-    transform: translateX(-30%);
-    width: 120%;
+    position: absolute;
+    bottom: 2vh;
+    transform: translateX(-50%);
+    width: 30%;
     height: 20vh;
     background-color: red;
     font-size: 3rem;
@@ -60,4 +61,10 @@ aside #sequence {
 
 #premade-moves-abort {
     display: inherit;
+}
+
+#moves p {
+    margin-left: 0.5vw;
+    min-width: 7vw;
+    font-size: 2rem;
 }
