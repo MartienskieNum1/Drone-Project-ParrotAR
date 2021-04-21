@@ -38,6 +38,50 @@ function create() {
         client.stop();
     }
 
+    function executeStick(msg) {
+        let stick = JSON.parse(msg);
+
+        if (stick.speed >= 0 && stick.speed <= 1) {
+            switch (stick.state) {
+                case "LeftStickUp":
+                    client.up(stick.speed).after(500, () => client.stop());
+                    break;
+                case "LeftStickDown":
+                    client.down(stick.speed).after(500, () => client.stop());
+                    break;
+                case "LeftStickLeft":
+                    client.counterClockwise(stick.speed).after(500, () => client.stop());
+                    break;
+                case "LeftStickRight":
+                    client.clockwise(stick.speed).after(500, () => client.stop());
+                    break;
+                case "RightStickUp":
+                    client.front(stick.speed).after(500, () => client.stop());
+                    break;
+                case "RightStickDown":
+                    client.back(stick.speed).after(500, () => client.stop());
+                    break;
+                case "RightStickLeft":
+                    client.left(stick.speed).after(500, () => client.stop());
+                    break;
+                case "RightStickRight":
+                    client.right(stick.speed).after(500, () => client.stop());
+                    break;
+                case "StickNeutral":
+                    client.stop();
+                    break;
+                default:
+                    console.error("Unexpected stick state: " + stick.state);
+                    client.stop();
+                    break;
+            }
+        } else {
+            console.error("Unexpected speed value: " + stick.speed);
+            client.stop();
+        }
+
+    }
+
     function appendMission(mission, action, param) {
         switch (action) {
             case "Forward":
@@ -73,7 +117,7 @@ function create() {
         }
     }
 
-    return {execute, abort};
+    return {execute, abort, executeStick};
 }
 
 module.exports = {create};
