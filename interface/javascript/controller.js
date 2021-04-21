@@ -12,7 +12,7 @@ function init() {
                             document.querySelector("#premade-moves-abort")
     
     abortButton.addEventListener('click', abort())
-    
+
     document.querySelectorAll("#controls button, #setup > div button").forEach(button => button.addEventListener('click', addAction));
     document.querySelector("#setup > button").addEventListener('click', execute);
 }

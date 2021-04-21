@@ -4,8 +4,8 @@ const autonomy = require('ardrone-autonomy');
 function create() {
 
 
-    function parseCommandList() {
-        console.log("Parsing the command list...");
+    function parseSequence() {
+        console.log("Parsing the sequence...");
     }
 
     function execute() {
@@ -16,7 +16,7 @@ function create() {
         console.log("Aborting mission...");
     }
 
-    return { parseCommandList, execute, abort };
+    return { parseSequence, execute, abort };
 }
 
 module.exports = { create };
