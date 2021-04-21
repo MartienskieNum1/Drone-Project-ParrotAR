@@ -1,0 +1,58 @@
+h1 {
+    font-size: 2rem;
+    font-weight: bold;
+    margin-bottom: 10px;
+    margin-top: 50px;
+}
+
+aside {
+    width: 20vw;
+}
+
+aside li {
+    font-size: 1.5rem;
+    line-height: 40px;
+    margin-bottom: 5px;
+    list-style-type: circle;
+}
+
+aside #sequence {
+    height: 60vh;
+    overflow-y: auto;
+}
+
+#moves {
+    width: 100vw;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    height: 100vh;
+}
+
+#moves li {
+    width: 33%;
+    list-style-type: none;
+    display: flex;
+    justify-content: center;
+    margin-top: 50px;
+}
+
+#abort, #premade-moves-abort {
+    display: none;
+    margin-top: 20px;
+    transform: translateX(-30%);
+    width: 120%;
+    height: 200px;
+    background-color: red;
+    font-size: 3rem;
+    font-weight: bold;
+    color: white;
+}
+
+#abort:after, #premade-moves-abort:after {
+    background-color: #ff7777;
+}
+
+#premade-moves-abort {
+    display: inherit;
+}

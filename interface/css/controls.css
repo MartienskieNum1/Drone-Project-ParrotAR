@@ -1,0 +1,52 @@
+main {
+    display: flex;
+    justify-content: space-between;
+}
+
+main > div {
+    width: 75%;
+    height: auto;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 100px;
+}
+
+main > div > div:first-child {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 50px;
+}
+
+#horizontal, #vertical {
+    width: 49%;
+    display: inline-block;
+}
+
+#horizontal>div, #vertical>div {
+    display: flex;
+    justify-content: space-around;
+    margin-bottom: 10px;
+}
+
+#setup > div {
+    width: 30%;
+    margin-left: auto;
+    margin-right: auto;
+    display: flex;
+    justify-content: space-between;
+}
+
+#setup > button {
+    margin-top: 50px;
+    margin-left: 50%;
+    transform: translateX(-50%);
+    width: 300px;
+}
+
+button {
+    width: 150px;
+    height: 120px;
+    border: 1px solid black;
+    border-radius: 25px;
+    font-size: 1.5rem;
+}

@@ -1,0 +1,53 @@
+body {
+    overflow: hidden;
+}
+
+header {
+    width: 100vw;
+    line-height: 50px;
+    background-image: linear-gradient(to right, #0051ff , rgb(2, 226, 255));;
+}
+
+header li {
+    display: inline-block;
+    padding-left: 20px;
+    padding-right: 20px;
+    font-size: 1.5rem;
+}
+
+header a{
+    color: white;
+    text-decoration: none;
+}
+
+button:focus {
+    outline: none;
+}
+
+
+button {
+    background-color: #CCCCCC;
+    color: #000000;
+    transition-duration: 0.4s;
+    overflow: hidden;
+}
+  
+#setup > button:after, #abort:after, #premade-moves-abort:after {
+    content: "";
+    background: #EEEEEE;
+    display: block;
+    position: absolute;
+    padding-top: 300%;
+    padding-left: 350%;
+    margin-left: -20px!important;
+    margin-top: -120%;
+    opacity: 0;
+    transition: all 0.8s
+}
+  
+#setup > button:active:after, #abort:active:after, #premade-moves-abort:active:after {
+    padding: 0;
+    margin: 0;
+    opacity: 1;
+    transition: 0s
+}
