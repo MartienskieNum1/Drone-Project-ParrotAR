@@ -53,6 +53,10 @@ function execute() {
     }
 }
 
+function abort(){
+    socket.emit('abort', null);
+}
+
 function createShape(shape) {
     actions.push(shape);
     execute();

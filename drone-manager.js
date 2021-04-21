@@ -1,3 +1,5 @@
+const DEFAULT_METER = 1;
+const DEFAULT_DEGREE = 90;
 const arDrone = require('ar-drone');
 const autonomy = require('ardrone-autonomy');
 
@@ -15,7 +17,6 @@ function create() {
 
         return mission;
     }
-
 
     function execute(msg) {
         const mission = parseSequence(msg);
@@ -82,41 +83,69 @@ function create() {
 
     }
 
-    function appendMission(mission, action, param) {
-        switch (action) {
-            case "Forward":
+    function appendMission(mission, action, param){
+        switch(action.toLowerCase()){
+            case "forward":
+                param = validateParamMeter(param);
                 mission.forward(param);
                 break;
-            case "Backward":
+            case "backward":
+                param = validateParamMeter(param);
                 mission.backward(param);
                 break;
-            case "Left":
+            case "left":
+                param = validateParamMeter(param);
                 mission.left(param);
                 break;
-            case "Right":
+            case "right":
+                param = validateParamMeter(param);
                 mission.right(param);
                 break;
-            case "Take off":
+            case "take off":
                 mission.takeoff();
                 break;
-            case "Land":
+            case "land":
                 mission.land();
                 break;
-            case "Turn Left":
+            case "turn left":
+                param = validateParamDegree(param);
                 mission.ccw(param);
                 break;
-            case "Turn Right":
+            case "turn right":
+                param = validateParamDegree(param);
                 mission.cw(param);
                 break;
-            case "Up":
+            case "up":
+                param = validateParamMeter(param);
                 mission.up(param);
                 break;
-            case "Down":
+            case "down":
+                param = validateParamMeter(param);
                 mission.down(param);
                 break;
         }
     }
 
+    function validateParamMeter(param){
+        param = param == null ? DEFAULT_METER : param;
+
+        if(param > 50 || param < 0){
+            param = DEFAULT_METER;
+        }
+
+        return param;
+    }
+    function validateParamDegree(param){
+        param = param == null ? DEFAULT_DEGREE : param;
+
+        if(param > 360 || param < 0){
+            param = DEFAULT_DEGREE;
+        }
+
+        return param;
+    }
+
+    return { execute, abort };
     return {execute, abort, executeStick};
 }
 
