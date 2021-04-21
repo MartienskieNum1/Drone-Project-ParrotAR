@@ -34,10 +34,34 @@ function create() {
             case "Backward":
                 mission.backward(param);
                 break;
+            case "Left":
+                mission.left(param);
+                break;
+            case "Right":
+                mission.right(param);
+                break;
+            case "Take off":
+                mission.takeoff();
+                break;
+            case "Land":
+                mission.land();
+                break;
+            case "Turn Left":
+                mission.ccw(param);
+                break;
+            case "Turn Right":
+                mission.cw(param);
+                break;
+            case "Up":
+                mission.up(param);
+                break;
+            case "Down":
+                mission.down(param);
+                break;
         }
     }
 
-    return { parseSequence, execute, abort };
+    return { execute, abort };
 }
 
 module.exports = { create };
