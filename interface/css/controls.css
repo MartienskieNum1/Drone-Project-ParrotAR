@@ -1,0 +1,68 @@
+main {
+    display: flex;
+    justify-content: space-between;
+}
+
+main > div {
+    width: 100%;
+    margin-top: 2vh;
+}
+
+main > div > div:first-child {
+    margin-bottom: 5vh;
+}
+
+#controls {
+    display: flex;
+    justify-content: space-around;
+}
+
+#horizontal, #vertical {
+    width: 40%;
+    display: inline-block;
+}
+
+#horizontal>div, #vertical>div {
+    display: flex;
+    justify-content: space-around;
+    margin-bottom: -5%;
+}
+
+#flips {
+    width: 10vw;
+    display: flex;
+    justify-content: space-between;
+    flex-direction: column;
+    align-items: center;
+}
+
+#flips button {
+    height: 6.5vw;
+    width: 6.5vw;
+    margin-bottom: 1vh;
+}
+
+#setup > div {
+    width: 30%;
+    margin-left: auto;
+    margin-right: auto;
+    display: flex;
+    justify-content: space-between;
+}
+
+#setup > button {
+    margin-top: 2vh;
+    margin-left: 50%;
+    transform: translateX(-50%);
+    width: 20%;
+    height: 10vh;
+    border-radius: 25px;
+}
+
+button {
+    width: 8vw;
+    height: 8vw;
+    border: 1px solid black;
+    border-radius: 50%;
+    font-size: 1.5rem;
+}

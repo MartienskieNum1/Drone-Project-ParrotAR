@@ -1,0 +1,63 @@
+h1 {
+    font-size: 3rem;
+    font-weight: bold;
+    margin-bottom: 0.5vh;
+    margin-top: 1vh;
+}
+
+aside {
+    width: 20vw;
+}
+
+aside li {
+    font-size: 2rem;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    line-height: 55px;
+}
+
+aside #sequence {
+    height: 60vh;
+    overflow-y: auto;
+}
+
+#moves {
+    width: 100vw;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    height: 100vh;
+}
+
+#moves li {
+    width: 33%;
+    list-style-type: none;
+    display: flex;
+    justify-content: center;
+    margin-top: 2vh;
+}
+
+#moves button {
+    width: 10vw;
+    height: 10vw;
+}
+
+#abort, #premade-moves-abort {
+    display: none;
+    margin-top: 2vh;
+    transform: translateX(-30%);
+    width: 120%;
+    height: 20vh;
+    background-color: red;
+    font-size: 3rem;
+    font-weight: bold;
+    color: white;
+    border-radius: 25px;
+}
+
+#abort:after, #premade-moves-abort:after {
+    background-color: #ff7777;
+}
+
+#premade-moves-abort {
+    display: inherit;
+}
