@@ -4,13 +4,28 @@ const autonomy = require('ardrone-autonomy');
 function create() {
 
 
-    function parseSequence() {
-        console.log("Parsing the sequence...");
+    function parseSequence(sequence) {
+        let mission  = autonomy.createMission();
+
+        // TODO: add sequence instructions to mission
+
+        return mission;
     }
 
-    function execute() {
-        parseSequence();
+    function execute(sequence) {
+        let mission = parseSequence(sequence);
+
         console.log("Executing mission...");
+
+        mission.run(function (err, result) {
+            if (err) {
+                console.log("Error; landing drone...", err);
+                mission.client().stop();
+                mission.client().land();
+            } else {
+                console.log("Mission completed");
+            }
+        })
     }
 
     function abort() {
