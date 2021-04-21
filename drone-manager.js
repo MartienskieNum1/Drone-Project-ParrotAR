@@ -9,7 +9,7 @@ function create() {
 
         let actions = JSON.parse(msg);
 
-        for (const action of actions) {
+        for (const a of actions) {
             appendMission(mission, a.action, a.param);
         }
 
