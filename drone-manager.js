@@ -41,6 +41,7 @@ function create() {
 
     function executeStick(msg) {
         let stick = JSON.parse(msg);
+        console.log("incoming");
 
         if (stick.speed >= 0 && stick.speed <= 1) {
             switch (stick.state) {
@@ -145,7 +146,6 @@ function create() {
         return param;
     }
 
-    return { execute, abort };
     return {execute, abort, executeStick};
 }
 
