@@ -97,7 +97,7 @@ let startLeftJoystick = () => {
             if (data.speed > 1) {
                 data.speed = 1
             }
-        
+
             emit("executeStick", JSON.stringify(data));   
         }
     
