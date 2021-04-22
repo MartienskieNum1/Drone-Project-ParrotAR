@@ -72,6 +72,13 @@ function create() {
                 case "StickNeutral":
                     client.stop();
                     break;
+                case "Takeoff":
+                    client.takeoff();
+                    break;
+                case "Land":
+                    client.stop();
+                    client.land();
+                    break;
                 default:
                     console.error("Unexpected stick state: " + stick.state);
                     client.stop();
