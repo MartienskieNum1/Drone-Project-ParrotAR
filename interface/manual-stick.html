@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="height=device-height, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Manual stick</title>
+    <link rel="stylesheet" href="css/reset.css">
+    <link rel="stylesheet" href="css/general.css">
+    <link rel="stylesheet" href="css/stick.css">
+</head>
+<body>
+    
+<header>
+    <nav>
+        <ul>
+            <li><a href="index.html">Make a path</a></li>
+            <li><a href="premade-moves.html">Premade moves</a></li>
+            <li><a href="manual-stick.html">Manual stick</a></li>
+        </ul>
+    </nav>
+</header>
+
+<main>
+    <div>
+        <div class="joystick" id="joy1Div"></div>
+    </div>
+    <div>
+        <button id="takeoff-land">Takeoff</button>
+    </div>
+    <div>
+        <div class="joystick" id="joy2Div"></div>
+    </div>
+</main>
+
+<script src="/socket.io/socket.io.js"></script>
+<script src="/JoyStick/joy.js"></script>
+<script src="/javascript/stick.js"></script>
+
+</body>
+</html>

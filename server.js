@@ -23,10 +23,14 @@ function acceptConnection(socket) {
         console.log('Execute received', msg);
         droneManager.execute(msg);
     });
-    socket.on('abort', (msg) => {
+    socket.on('abort', () => {
         console.log('Abort');
         droneManager.abort();
-    })
+    });
+    socket.on('executeStick', (msg) => {
+       console.log('Stick Execute received', msg);
+       droneManager.executeStick(msg);
+    });
 }
 
 function onError(error) {
