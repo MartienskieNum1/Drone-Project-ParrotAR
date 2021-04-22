@@ -8,6 +8,8 @@ try {
 
     var client = arDrone.createClient();
 
+    //require('ar-drone-png-stream')(client,{port:8000})
+
     // client.config('video:video_channel', 0);
     // client.config('video:video_channel', 3);
 
