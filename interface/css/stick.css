@@ -1,3 +1,4 @@
+/*takeoff land*/
 button {
     position: absolute;
     font-size: 1.4em;
@@ -8,6 +9,7 @@ button {
     border-radius: 10px;
 }
 
+/*joysticks*/
 .joystick {
     position: absolute;
     width: 25vw;
@@ -22,4 +24,19 @@ button {
 #joy2Div {
     bottom: 50px;
     right: 20px;
+}
+
+/*functionalities*/
+.functionalities {
+    position: absolute;
+    top: 105px;
+    left: 50px;
+}
+
+.gyroscope {
+    margin-bottom: 15px;
+}
+
+input[type="checkbox"] {
+    transform: scale(2);
 }
