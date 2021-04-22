@@ -46,28 +46,36 @@ function create() {
         if (stick.speed >= 0 && stick.speed <= 1) {
             switch (stick.state) {
                 case "LeftStickUp":
-                    client.up(stick.speed).after(500, () => client.stop());
+                    client.up(stick.speed);
+                    client.after(500, () => client.stop());
                     break;
                 case "LeftStickDown":
-                    client.down(stick.speed).after(500, () => client.stop());
+                    client.down(stick.speed);
+                    client.after(500, () => client.stop());
                     break;
                 case "LeftStickLeft":
-                    client.counterClockwise(stick.speed).after(500, () => client.stop());
+                    client.counterClockwise(stick.speed);
+                    client.after(500, () => client.stop());
                     break;
                 case "LeftStickRight":
-                    client.clockwise(stick.speed).after(500, () => client.stop());
+                    client.clockwise(stick.speed);
+                    client.after(500, () => client.stop());
                     break;
                 case "RightStickUp":
-                    client.front(stick.speed).after(500, () => client.stop());
+                    client.front(stick.speed);
+                    client.after(500, () => client.stop());
                     break;
                 case "RightStickDown":
-                    client.back(stick.speed).after(500, () => client.stop());
+                    client.back(stick.speed);
+                    client.after(500, () => client.stop());
                     break;
                 case "RightStickLeft":
-                    client.left(stick.speed).after(500, () => client.stop());
+                    client.left(stick.speed);
+                    client.after(500, () => client.stop());
                     break;
                 case "RightStickRight":
-                    client.right(stick.speed).after(500, () => client.stop());
+                    client.right(stick.speed);
+                    client.after(500, () => client.stop());
                     break;
                 case "StickNeutral":
                     client.stop();
