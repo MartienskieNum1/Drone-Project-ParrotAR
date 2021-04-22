@@ -74,59 +74,59 @@ let takeoffLand = () => {
 // joystick input
 // left joystick
 let startLeftJoystick = () => {
-    // setInterval(function () {
-    //     let x = Joy1.GetX();
-    //     let y = Joy1.GetY();
-    //     let data = new Object();
+    setInterval(function () {
+        let x = Joy1.GetX();
+        let y = Joy1.GetY();
+        let data = new Object();
     
-    //     if (x != 0 && y != 0) {
-    //         if (y > 0 && y > Math.abs(x)) {
-    //             data.state = "LeftStickUp";
-    //             data.speed = y / 100;
-    //         } else if (y < 0 && Math.abs(y) > Math.abs(x)) {
-    //             data.state = "LeftStickDown";
-    //             data.speed = y / 100 * -1;
-    //         } else if (x > 0 && x > Math.abs(y)) {
-    //             data.state = "LeftStickRight";
-    //             data.speed = x / 100;
-    //         } else if (x < 0 && Math.abs(x) > Math.abs(y)) {
-    //             data.state = "LeftStickLeft";
-    //             data.speed = x / 100 * -1;
-    //         }
+        if (x != 0 && y != 0) {
+            if (y > 0 && y > Math.abs(x)) {
+                data.state = "LeftStickUp";
+                data.speed = y / 100;
+            } else if (y < 0 && Math.abs(y) > Math.abs(x)) {
+                data.state = "LeftStickDown";
+                data.speed = y / 100 * -1;
+            } else if (x > 0 && x > Math.abs(y)) {
+                data.state = "LeftStickRight";
+                data.speed = x / 100;
+            } else if (x < 0 && Math.abs(x) > Math.abs(y)) {
+                data.state = "LeftStickLeft";
+                data.speed = x / 100 * -1;
+            }
         
-    //         emit("executeStick", JSON.stringify(data));   
-    //     }
+            emit("executeStick", JSON.stringify(data));   
+        }
     
-    // }, 100);    
+    }, 100);    
 };
 
 // right joystick
 let startRightJoystick = () => {
-    // setInterval(function () {
-    //     let x = Joy2.GetX();
-    //     let y = Joy2.GetY();
-    //     let data = new Object();
+    setInterval(function () {
+        let x = Joy2.GetX();
+        let y = Joy2.GetY();
+        let data = new Object();
     
-    //     if (y > 0 && y > Math.abs(x)) {
-    //         data.state = "RightStickUp";
-    //         data.speed = y / 100;
-    //     } else if (y < 0 && Math.abs(y) > Math.abs(x)) {
-    //         data.state = "RightStickDown";
-    //         data.speed = y / 100 * -1;
-    //     } else if (x > 0 && x > Math.abs(y)) {
-    //         data.state = "RightStickRight";
-    //         data.speed = x / 100;
-    //     } else if (x < 0 && Math.abs(x) > Math.abs(y)) {
-    //         data.state = "RightStickLeft";
-    //         data.speed = x / 100 * -1;
-    //     } else {
-    //         data.state = "StickNeutral";
-    //         data.speed = 0;
-    //     }
+        if (y > 0 && y > Math.abs(x)) {
+            data.state = "RightStickUp";
+            data.speed = y / 100;
+        } else if (y < 0 && Math.abs(y) > Math.abs(x)) {
+            data.state = "RightStickDown";
+            data.speed = y / 100 * -1;
+        } else if (x > 0 && x > Math.abs(y)) {
+            data.state = "RightStickRight";
+            data.speed = x / 100;
+        } else if (x < 0 && Math.abs(x) > Math.abs(y)) {
+            data.state = "RightStickLeft";
+            data.speed = x / 100 * -1;
+        } else {
+            data.state = "StickNeutral";
+            data.speed = 0;
+        }
     
-    //     emit("executeStick", JSON.stringify(data));
+        emit("executeStick", JSON.stringify(data));
     
-    // }, 100);    
+    }, 100);    
 };
 
 let emit = (command, payload) => {
