@@ -22,23 +22,18 @@ function create() {
         return new Promise(resolve => setTimeout(resolve, ms));
     }
 
-    function execute(msg) {
-        const mission = parseSequence(msg);
-        console.log("Executing mission...");
+    async function execute(msg) {
+        let actions = JSON.parse(msg);
 
-        let action = JSON.parse(msg);
-
-        action.forEach (
-            async function (element) {
+        for (const element of actions) {
                 for (let index = 0; index < 10; index++) {
                     executeStick(element, false); 
                     await sleep(100);
                 }
                 client.stop();
                 await sleep(1000);
-            }
             
-        );
+        };
 
         /*
         mission.run(function (err, result) {
@@ -67,55 +62,52 @@ function create() {
             state = stick.state;
             speed = stick.speed;
         } else {
-            state = getState(msg.action);
+            state = msg.action;
             speed = 0.2;
         }
 
-        console.log("incoming");
-
-        console.log(state);
 
         if (speed >= 0 && speed <= 1) {
-            switch (state) {
-                case "LeftStickUp":
+            switch (state.toLowerCase()) {
+                case "up":
                     client.up(speed);
                     client.after(500, () => client.stop());
                     break;
-                case "LeftStickDown":
+                case "down":
                     client.down(speed);
                     client.after(500, () => client.stop());
                     break;
-                case "LeftStickLeft":
+                case "turn left":
                     client.counterClockwise(speed);
                     client.after(500, () => client.stop());
                     break;
-                case "LeftStickRight":
+                case "turn right":
                     client.clockwise(speed);
                     client.after(500, () => client.stop());
                     break;
-                case "RightStickUp":
+                case "forward":
                     client.front(speed);
                     client.after(500, () => client.stop());
                     break;
-                case "RightStickDown":
+                case "backward":
                     client.back(speed);
                     client.after(500, () => client.stop());
                     break;
-                case "RightStickLeft":
+                case "left":
                     client.left(speed);
                     client.after(500, () => client.stop());
                     break;
-                case "RightStickRight":
+                case "right":
                     client.right(speed);
                     client.after(500, () => client.stop());
                     break;
-                case "StickNeutral":
+                case "hover":
                     client.stop();
                     break;
-                case "Takeoff":
+                case "take off":
                     client.takeoff();
                     break;
-                case "Land":
+                case "land":
                     client.stop();
                     client.land();
                     break;
@@ -129,34 +121,6 @@ function create() {
             client.stop();
         }
 
-    }
-
-    function getState(action) {
-        switch (action) {
-            case "FORWARD":
-                return "RightStickUp";
-            case "LEFT":
-                return "RightStickLeft";
-            case "RIGHT":
-                return "RightStickRight";
-            case "BACKWARD":
-                return "RightStickDown";
-            case "UP":
-                return "LeftStickUp";
-            case "DOWN":
-                return "LeftStickDown";
-            case "TURN LEFT":
-                return "LeftStickLeft";
-            case "TURN RIGHT":
-                return "RightStickUp";
-            case "LAND":
-                return "Land";
-            case "TAKE OFF":
-                return "Takeoff"
-        
-            default:
-                break;
-        }
     }
 
     function appendMission(mission, action, param){

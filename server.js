@@ -20,15 +20,12 @@ server.on('error', onError);
 function acceptConnection(socket) {
     console.log("Connection received ...");
     socket.on('execute', (msg) => {
-        console.log('Execute received', msg);
         droneManager.execute(msg);
     });
     socket.on('abort', () => {
-        console.log('Abort');
         droneManager.abort();
     });
     socket.on('executeStick', (msg) => {
-       console.log('Stick Execute received', msg);
        droneManager.executeStick(msg);
     });
 }

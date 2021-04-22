@@ -81,16 +81,16 @@ let startLeftJoystick = () => {
     
         if (x != 0 && y != 0) {
             if (y > 0 && y > Math.abs(x)) {
-                data.state = "LeftStickUp";
+                data.state = "up";
                 data.speed = y / 100;
             } else if (y < 0 && Math.abs(y) > Math.abs(x)) {
-                data.state = "LeftStickDown";
+                data.state = "down";
                 data.speed = y / 100 * -1;
             } else if (x > 0 && x > Math.abs(y)) {
-                data.state = "LeftStickRight";
+                data.state = "turn right";
                 data.speed = x / 100;
             } else if (x < 0 && Math.abs(x) > Math.abs(y)) {
-                data.state = "LeftStickLeft";
+                data.state = "turn left";
                 data.speed = x / 100 * -1;
             }
 
@@ -118,19 +118,19 @@ let startRightJoystick = () => {
         }
     
         if (y > 0 && y > Math.abs(x)) {
-            data.state = "RightStickUp";
+            data.state = "forward";
             data.speed = y / 100;
         } else if (y < 0 && Math.abs(y) > Math.abs(x)) {
-            data.state = "RightStickDown";
+            data.state = "backward";
             data.speed = y / 100 * -1;
         } else if (x > 0 && x > Math.abs(y)) {
-            data.state = "RightStickRight";
+            data.state = "right";
             data.speed = x / 100;
         } else if (x < 0 && Math.abs(x) > Math.abs(y)) {
-            data.state = "RightStickLeft";
+            data.state = "left";
             data.speed = x / 100 * -1;
         } else {
-            data.state = "StickNeutral";
+            data.state = "hover";
             data.speed = 0;
         }
 
