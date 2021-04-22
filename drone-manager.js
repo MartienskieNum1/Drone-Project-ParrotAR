@@ -47,35 +47,27 @@ function create() {
             switch (stick.state) {
                 case "LeftStickUp":
                     client.up(stick.speed);
-                    client.after(500, () => client.stop());
                     break;
                 case "LeftStickDown":
                     client.down(stick.speed);
-                    client.after(500, () => client.stop());
                     break;
                 case "LeftStickLeft":
                     client.counterClockwise(stick.speed);
-                    client.after(500, () => client.stop());
                     break;
                 case "LeftStickRight":
                     client.clockwise(stick.speed);
-                    client.after(500, () => client.stop());
                     break;
                 case "RightStickUp":
                     client.front(stick.speed);
-                    client.after(500, () => client.stop());
                     break;
                 case "RightStickDown":
                     client.back(stick.speed);
-                    client.after(500, () => client.stop());
                     break;
                 case "RightStickLeft":
                     client.left(stick.speed);
-                    client.after(500, () => client.stop());
                     break;
                 case "RightStickRight":
                     client.right(stick.speed);
-                    client.after(500, () => client.stop());
                     break;
                 case "StickNeutral":
                     client.stop();
