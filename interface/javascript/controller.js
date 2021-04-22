@@ -1,4 +1,5 @@
 'use strict';
+
 let socket;
 document.addEventListener('DOMContentLoaded', init);
 
@@ -23,8 +24,7 @@ function addToSequence(e) {
 
     let sequenceList = document.querySelector("#sequence");
 
-    if ( e.target.innerText !== "Take off" || !actions.includes(e.target) || actions[actions.length-1].innerText === "Land" ) {
-        
+    if ( ActionAvailable(e.target.innerText) ) {
         addAction(e.target.innerText, null)
         
         sequenceList.innerHTML += `<li data-id="${actions.length-1}">${e.target.innerText}</li>`
@@ -35,6 +35,17 @@ function addToSequence(e) {
     sequenceList.scrollTop = sequenceList.scrollHeight;
 }
 
+function ActionAvailable(actionName) {
+    if (actionName === "TAKE OFF" && actions.length > 0) {
+        return actions[actions.length - 1].action === "LAND"
+    } else if (actionName === "LAND" && actions.length > 0) {
+        return actions[actions.length - 1].action !== "LAND"
+    } else {
+        return true;
+    }
+
+}
+
 function removeAction(e) {
     let index = e.target.getAttribute("data-id");
     actions.splice(index, 1);
@@ -43,10 +54,12 @@ function removeAction(e) {
 
 function execute() {
     if (actions.length > 0) {
-        document.querySelector("#abort").style.display = "inherit"
 
-        document.querySelector("#sequence").innerHTML = ``;
-
+        if ( (window.location.href).includes("index") ) {
+            document.querySelector("#abort").style.display = "inherit"
+            document.querySelector("#sequence").innerHTML = ``;
+        }
+        
         socket.emit('execute', JSON.stringify(actions));
 
         actions = [];
