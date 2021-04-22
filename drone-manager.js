@@ -18,11 +18,28 @@ function create() {
         return mission;
     }
 
+    function sleep(ms) {
+        return new Promise(resolve => setTimeout(resolve, ms));
+    }
+
     function execute(msg) {
         const mission = parseSequence(msg);
-        console.log(mission);
         console.log("Executing mission...");
 
+        let action = JSON.parse(msg);
+
+        action.forEach (
+            async function (element) {
+                for (let index = 0; index < 10; index++) {
+                    executeStick(element, false); 
+                    await sleep(100);
+                }
+                client.stop();
+            }
+            
+        );
+
+        /*
         mission.run(function (err, result) {
             if (err) {
                 console.log("Error; landing drone...", err);
@@ -32,6 +49,7 @@ function create() {
                 console.log("Mission completed");
             }
         })
+        */
     }
 
     function abort() {
@@ -39,42 +57,55 @@ function create() {
         client.stop();
     }
 
-    function executeStick(msg) {
-        let stick = JSON.parse(msg);
+    function executeStick(msg, withStick = true) {
+        let state;
+        let speed;
+
+        if (withStick) {
+            let stick = JSON.parse(msg);
+            state = stick.state;
+            speed = stick.speed;
+        } else {
+            state = getState(msg.action);
+            speed = 0.2;
+        }
+
         console.log("incoming");
 
-        if (stick.speed >= 0 && stick.speed <= 1) {
-            switch (stick.state) {
+        console.log(state);
+
+        if (speed >= 0 && speed <= 1) {
+            switch (state) {
                 case "LeftStickUp":
-                    client.up(stick.speed);
+                    client.up(speed);
                     client.after(500, () => client.stop());
                     break;
                 case "LeftStickDown":
-                    client.down(stick.speed);
+                    client.down(speed);
                     client.after(500, () => client.stop());
                     break;
                 case "LeftStickLeft":
-                    client.counterClockwise(stick.speed);
+                    client.counterClockwise(speed);
                     client.after(500, () => client.stop());
                     break;
                 case "LeftStickRight":
-                    client.clockwise(stick.speed);
+                    client.clockwise(speed);
                     client.after(500, () => client.stop());
                     break;
                 case "RightStickUp":
-                    client.front(stick.speed);
+                    client.front(speed);
                     client.after(500, () => client.stop());
                     break;
                 case "RightStickDown":
-                    client.back(stick.speed);
+                    client.back(speed);
                     client.after(500, () => client.stop());
                     break;
                 case "RightStickLeft":
-                    client.left(stick.speed);
+                    client.left(speed);
                     client.after(500, () => client.stop());
                     break;
                 case "RightStickRight":
-                    client.right(stick.speed);
+                    client.right(speed);
                     client.after(500, () => client.stop());
                     break;
                 case "StickNeutral":
@@ -88,15 +119,43 @@ function create() {
                     client.land();
                     break;
                 default:
-                    console.error("Unexpected stick state: " + stick.state);
+                    console.error("Unexpected stick state: " + state);
                     client.stop();
                     break;
             }
         } else {
-            console.error("Unexpected speed value: " + stick.speed);
+            console.error("Unexpected speed value: " + speed);
             client.stop();
         }
 
+    }
+
+    function getState(action) {
+        switch (action) {
+            case "FORWARD":
+                return "RightStickUp";
+            case "LEFT":
+                return "RightStickLeft";
+            case "RIGHT":
+                return "RightStickRight";
+            case "BACKWARD":
+                return "RightStickDown";
+            case "UP":
+                return "LeftStickUp";
+            case "DOWN":
+                return "LeftStickDown";
+            case "TURN LEFT":
+                return "LeftStickLeft";
+            case "TURN RIGHT":
+                return "RightStickUp";
+            case "LAND":
+                return "Land";
+            case "TAKE OFF":
+                return "Takeoff"
+        
+            default:
+                break;
+        }
     }
 
     function appendMission(mission, action, param){
