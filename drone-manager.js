@@ -35,6 +35,7 @@ function create() {
                     await sleep(100);
                 }
                 client.stop();
+                await sleep(1000);
             }
             
         );
