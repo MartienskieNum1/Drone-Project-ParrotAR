@@ -93,6 +93,10 @@ let startLeftJoystick = () => {
                 data.state = "LeftStickLeft";
                 data.speed = x / 100 * -1;
             }
+
+            if (data.speed > 1) {
+                data.speed = 1
+            }
         
             emit("executeStick", JSON.stringify(data));   
         }
@@ -106,6 +110,12 @@ let startRightJoystick = () => {
         let x = Joy2.GetX();
         let y = Joy2.GetY();
         let data = new Object();
+
+        if (x > 100) {
+            x = 100;
+        } else if (x < -100) {
+            x = -100
+        }
     
         if (y > 0 && y > Math.abs(x)) {
             data.state = "RightStickUp";
@@ -122,6 +132,10 @@ let startRightJoystick = () => {
         } else {
             data.state = "StickNeutral";
             data.speed = 0;
+        }
+
+        if (data.speed > 1) {
+            data.speed = 1
         }
     
         emit("executeStick", JSON.stringify(data));
