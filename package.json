@@ -17,6 +17,8 @@
     "ar-drone": "^0.3.3",
     "ardrone-autonomy": "^0.1.2",
     "express": "^4.17.1",
+    "http": "0.0.1-security",
+    "path": "^0.12.7",
     "socket.io": "^4.0.1"
   }
 }
