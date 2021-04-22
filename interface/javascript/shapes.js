@@ -33,15 +33,15 @@ function drawShape(e) {
 
 function drawSquare() {
     for (let index = 0; index < 4; index++) {
-        addAction("turn Left");
         addAction("forward");
+        addAction("turn Left");
     }
 }
 
 function drawTriangle() {
     for (let index = 0; index < 3; index++) {
-        addAction("turn Left", 120);
         addAction("forward");
+        addAction("turn Left", 120);
     }
 }
 
@@ -64,6 +64,30 @@ function drawStandingRectangle() {
 function drawPentagon() {
     for (let index = 0; index < 5; index++) {
         addAction("Forward");
-        addAction("turn Left", 108);
+        addAction("Turn Left", 108);
     }
+}
+
+function drawHearth() {
+    addAction("Turn Right", 40)
+    addAction("Forward", 1.9)
+    
+    for (let index = 0; index < 4; index++) {
+        addAction("Turn Left", 40)
+        addAction("Forward", 0.5);
+        
+    }
+    
+    addAction("Turn right", 135)
+
+    for (let index = 0; index < 4; index++) {
+        addAction("Turn Left", 40)
+        addAction("Forward", 0.5);
+        
+    }
+    
+    addAction("Turn Left", 40)
+    addAction("Forward", 1.9);
+
+
 }
