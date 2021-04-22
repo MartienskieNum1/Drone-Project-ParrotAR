@@ -54,10 +54,12 @@ function removeAction(e) {
 
 function execute() {
     if (actions.length > 0) {
-        document.querySelector("#abort").style.display = "inherit"
 
-        document.querySelector("#sequence").innerHTML = ``;
-
+        if ( (window.location.href).includes("index") ) {
+            document.querySelector("#abort").style.display = "inherit"
+            document.querySelector("#sequence").innerHTML = ``;
+        }
+        
         socket.emit('execute', JSON.stringify(actions));
 
         actions = [];
