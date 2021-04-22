@@ -57,7 +57,7 @@ button {
     transition: 0s
 }
 
-h1 {
+body > h1 {
     width: 100%;
     text-align: center;
 }
