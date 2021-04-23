@@ -1,4 +1,3 @@
-
 'use strict';
 let socket;
 document.addEventListener('DOMContentLoaded', init);
@@ -81,9 +80,5 @@ function addAction(actionName, parameter = null) {
 
 function abort(e) {
     e.preventDefault();
-
-    actions = [];
-    document.querySelector("#sequence").innerHTML = ``;
-
     socket.emit("abort", null);
 }
