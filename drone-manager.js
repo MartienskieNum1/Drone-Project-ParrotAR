@@ -1,7 +1,6 @@
 const DEFAULT_METER = 1;
 const DEFAULT_DEGREE = 90;
 const arDrone = require('ar-drone');
-const autonomy = require('ardrone-autonomy');
 
 function create() {
     const client = arDrone.createClient();
