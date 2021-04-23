@@ -101,7 +101,7 @@ function create() {
                     console.log("strafe right", speed);
                     client.right(speed);
                     break;
-                case "hover":
+                case "stop":
                     console.log("hover", speed);
                     client.stop();
                     break;

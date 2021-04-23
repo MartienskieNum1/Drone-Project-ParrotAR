@@ -99,7 +99,7 @@ let navigateDown = (e) => {
 
 let navigateUp = (e) => {
     keyboardData.speed = 0;
-    keyboardData.state = "hover";
+    keyboardData.state = "stop";
     if (keyboardChbx.checked) {
         if (possibleKeys.includes(e.key)) {
             switch (e.key) {
