@@ -6,18 +6,6 @@ const autonomy = require('ardrone-autonomy');
 function create() {
     const client = arDrone.createClient();
 
-    function parseSequence(msg) {
-        let mission = autonomy.createMission();
-
-        let actions = JSON.parse(msg);
-
-        for (const a of actions) {
-            appendMission(mission, a.action, a.param);
-        }
-
-        return mission;
-    }
-
     function sleep(ms) {
         return new Promise(resolve => setTimeout(resolve, ms));
     }
@@ -33,19 +21,7 @@ function create() {
                 client.stop();
                 await sleep(1000);
             
-        };
-
-        /*
-        mission.run(function (err, result) {
-            if (err) {
-                console.log("Error; landing drone...", err);
-                mission.client().stop();
-                mission.client().land();
-            } else {
-                console.log("Mission completed");
-            }
-        })
-        */
+        }
     }
 
     function abort() {
@@ -124,49 +100,6 @@ function create() {
             client.stop();
         }
 
-    }
-
-    function appendMission(mission, action, param){
-        switch(action.toLowerCase()){
-            case "forward":
-                param = validateParamMeter(param);
-                mission.forward(param);
-                break;
-            case "backward":
-                param = validateParamMeter(param);
-                mission.backward(param);
-                break;
-            case "left":
-                param = validateParamMeter(param);
-                mission.left(param);
-                break;
-            case "right":
-                param = validateParamMeter(param);
-                mission.right(param);
-                break;
-            case "take off":
-                mission.takeoff();
-                break;
-            case "land":
-                mission.land();
-                break;
-            case "turn left":
-                param = validateParamDegree(param);
-                mission.ccw(param);
-                break;
-            case "turn right":
-                param = validateParamDegree(param);
-                mission.cw(param);
-                break;
-            case "up":
-                param = validateParamMeter(param);
-                mission.up(param);
-                break;
-            case "down":
-                param = validateParamMeter(param);
-                mission.down(param);
-                break;
-        }
     }
 
     function validateParamMeter(param){
