@@ -69,7 +69,9 @@ function execute() {
 
 function addAction(actionName, parameter = null) {
     if (actionName === "FLIP") {
-        actionName = Math.floor(Math.random() * 2) == 0 ?
+        let randomNumber = Math.random();
+
+        actionName = randomNumber > 0.5 ?
                         "Flip ahead" :
                         "Flip behind"
     }
