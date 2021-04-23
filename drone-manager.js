@@ -70,44 +70,55 @@ function create() {
         if (speed >= 0 && speed <= 1) {
             switch (state.toLowerCase()) {
                 case "up":
+                    console.log("up");
                     client.up(speed);
                     client.after(500, () => client.stop());
                     break;
                 case "down":
+                    console.log("down");
                     client.down(speed);
                     client.after(500, () => client.stop());
                     break;
                 case "turn left":
+                    console.log("turn left");
                     client.counterClockwise(speed);
                     client.after(500, () => client.stop());
                     break;
                 case "turn right":
+                    console.log("turn right");
                     client.clockwise(speed);
                     client.after(500, () => client.stop());
                     break;
                 case "forward":
+                    console.log("forward");
                     client.front(speed);
                     client.after(500, () => client.stop());
                     break;
                 case "backward":
+                    console.log("backward");
                     client.back(speed);
                     client.after(500, () => client.stop());
                     break;
                 case "left":
+                    console.log("left");
                     client.left(speed);
                     client.after(500, () => client.stop());
                     break;
                 case "right":
+                    console.log("right");
                     client.right(speed);
                     client.after(500, () => client.stop());
                     break;
                 case "hover":
+                    console.log("hover");
                     client.stop();
                     break;
                 case "take off":
+                    console.log("takeoff");
                     client.takeoff();
                     break;
                 case "land":
+                    console.log("land");
                     client.stop();
                     client.land();
                     break;
