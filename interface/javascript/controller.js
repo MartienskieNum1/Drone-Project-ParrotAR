@@ -60,7 +60,7 @@ function execute() {
             document.querySelector("#sequence").innerHTML = ``;
         }
         
-        socket.emit('execute', JSON.stringify(actions));
+        socket.emit('executeSequence', JSON.stringify(actions));
 
         actions = [];
     }

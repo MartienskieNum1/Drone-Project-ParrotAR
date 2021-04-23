@@ -2,6 +2,7 @@ const DEFAULT_SPEED = 0.2;
 const arDrone = require('ar-drone');
 
 function create() {
+    let abortFlag = false;
     const client = arDrone.createClient();
 
     function sleep(ms) {
@@ -12,19 +13,20 @@ function create() {
         let actions = JSON.parse(msg);
 
         for (const element of actions) {
-                for (let index = 0; index < 10; index++) {
-                    executeCommand(element, false);
-                    await sleep(100);
-                }
-                client.stop();
+            if(!abortFlag){
+                executeCommand(element, false);
                 await sleep(1000);
-            
+                client.stop();
+                await sleep(500);
+            }
         }
+        abortFlag = false;
     }
 
     function abort() {
         console.log("Aborting mission...");
         client.stop();
+        abortFlag = true;
     }
 
     function executeCommand(msg, withStick = true) {
