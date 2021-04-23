@@ -9,12 +9,12 @@ function create() {
         return new Promise(resolve => setTimeout(resolve, ms));
     }
 
-    async function execute(msg) {
+    async function executeSequence(msg) {
         let actions = JSON.parse(msg);
 
         for (const element of actions) {
                 for (let index = 0; index < 10; index++) {
-                    executeStick(element, false); 
+                    executeCommand(element, false);
                     await sleep(100);
                 }
                 client.stop();
@@ -28,7 +28,7 @@ function create() {
         client.stop();
     }
 
-    function executeStick(msg, withStick = true) {
+    function executeCommand(msg, withStick = true) {
         let state;
         let speed;
 
@@ -120,7 +120,7 @@ function create() {
         return param;
     }
 
-    return {execute, abort, executeStick};
+    return {executeSequence, abort, executeCommand};
 }
 
 module.exports = {create};

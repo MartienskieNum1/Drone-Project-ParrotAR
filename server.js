@@ -20,13 +20,13 @@ server.on('error', onError);
 function acceptConnection(socket) {
     console.log("Connection received ...");
     socket.on('execute', (msg) => {
-        droneManager.execute(msg);
+        droneManager.executeSequence(msg);
     });
     socket.on('abort', () => {
         droneManager.abort();
     });
     socket.on('executeStick', (msg) => {
-       droneManager.executeStick(msg);
+       droneManager.executeCommand(msg);
     });
 }
 
