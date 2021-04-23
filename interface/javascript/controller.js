@@ -68,6 +68,12 @@ function execute() {
 }
 
 function addAction(actionName, parameter = null) {
+    if (actionName === "FLIP") {
+        actionName = Math.floor(Math.random() * 2) == 0 ?
+                        "Flip ahead" :
+                        "Flip behind"
+    }
+
     actions.push({
         action: actionName,
         param: parameter
