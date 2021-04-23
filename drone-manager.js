@@ -90,7 +90,7 @@ function create() {
                     client.right(speed);
                     break;
                 case "stop":
-                    console.log("hover", speed);
+                    console.log("stop", speed);
                     client.stop();
                     break;
                 case "take off":
