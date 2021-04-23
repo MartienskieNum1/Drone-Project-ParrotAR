@@ -1,4 +1,6 @@
 const DEFAULT_SPEED = 0.2;
+const DEFAULT_ACTION_TIME = 1600;
+const DEFAULT_REST_TIME = 500;
 const arDrone = require('ar-drone');
 
 function create() {
@@ -15,9 +17,12 @@ function create() {
         for (const element of actions) {
             if(!abortFlag){
                 executeCommand(element, false);
-                await sleep(1000);
+                if(element.action === 'TAKE OFF'){
+                    await sleep(3000);
+                }
+                await sleep(DEFAULT_ACTION_TIME);
                 client.stop();
-                await sleep(500);
+                await sleep(DEFAULT_REST_TIME);
             }
         }
         abortFlag = false;
