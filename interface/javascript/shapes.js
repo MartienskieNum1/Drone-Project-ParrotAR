@@ -20,7 +20,7 @@ function drawShape(e) {
         "triangle": () => drawTriangle(),
         "star": () => drawStar(),
         "pentagon": () => drawPentagon(),
-        "hearth": () => drawHearth()
+        "heart": () => drawHeart()
     }
     shapeSwitch[shapeName.toLowerCase()]();
 
@@ -68,7 +68,7 @@ function drawPentagon() {
     }
 }
 
-function drawHearth() {
+function drawHeart() {
     addAction("Turn Right", 45)
     addAction("Forward", 1.9)
     
