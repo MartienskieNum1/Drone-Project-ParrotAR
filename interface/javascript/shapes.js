@@ -3,7 +3,8 @@
 document.addEventListener('DOMContentLoaded', init);
 
 function init() {
-    document.querySelectorAll("#moves li div").forEach(button => button.addEventListener('click', drawShape));
+    document.querySelectorAll("#moves li div")
+        .forEach(button => button.addEventListener('click', drawShape));
 }
 
 function drawShape(e) {
@@ -12,29 +13,16 @@ function drawShape(e) {
                         e.target.parentElement.getAttribute("data-id");
 
     console.log(shapeName)
-    
-    switch ( (shapeName).toLowerCase() ) {
-        case "square":
-            drawSquare()
-            break;
-    
-        case "rectangle":
-            drawRectangle()
-            break;
 
-        case "triangle":
-            drawTriangle();
-            break;
-
-        case "star":
-            drawStar();
-        
-        case "pentagon":
-            drawPentagon();
-
-        case "hearth":
-            drawHearth()
+    let shapeSwitch = {
+        "square": () => drawSquare(),
+        "rectangle": () => drawRectangle(),
+        "triangle": () => drawTriangle(),
+        "star": () => drawStar(),
+        "pentagon": () => drawPentagon(),
+        "heart": () => drawHeart()
     }
+    shapeSwitch[shapeName.toLowerCase()]();
 
     execute()
 }
@@ -80,7 +68,7 @@ function drawPentagon() {
     }
 }
 
-function drawHearth() {
+function drawHeart() {
     addAction("Turn Right", 45)
     addAction("Forward", 1.9)
     
