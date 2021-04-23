@@ -33,10 +33,6 @@ button {
     left: 50px;
 }
 
-.gyroscope {
-    margin-bottom: 15px;
-}
-
 input[type="checkbox"] {
     transform: scale(2);
 }

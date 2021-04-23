@@ -16,7 +16,9 @@ function init() {
     abortButton.addEventListener('click', abort)
 
     document.querySelectorAll("#controls button, #setup > div button").forEach(button => button.addEventListener('click', addToSequence));
-    document.querySelector("#setup > button").addEventListener('click', execute);
+    if ((window.location.href).includes("index")) {
+        document.querySelector("#setup > button").addEventListener('click', execute);
+    }
 }
 
 function addToSequence(e) {
