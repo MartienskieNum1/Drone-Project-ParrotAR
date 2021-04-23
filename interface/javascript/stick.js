@@ -120,32 +120,17 @@ let navigateUp = (e) => {
     keyboardData.state = "stop";
     if (keyboardChbx.checked) {
         if (possibleKeys.includes(e.key)) {
-            switch (e.key) {
-                case 'z':
-                    KeyPressed.ZPressed = false;
-                    break;
-                case 's':
-                    KeyPressed.SPressed = false;
-                    break;
-                case 'q':
-                    KeyPressed.QPressed = false;
-                    break;
-                case 'd':
-                    KeyPressed.DPressed = false;
-                    break;
-                case 'o':
-                    KeyPressed.OPressed = false;
-                    break;
-                case 'l':
-                    KeyPressed.LPressed = false;
-                    break;
-                case 'k':
-                    KeyPressed.KPressed = false;
-                    break;
-                case 'm':
-                    KeyPressed.MPressed = false;
-                    break;
+            let keyPressedSwitch = {
+                'z': () => KeyPressed.ZPressed = false,
+                's': () => KeyPressed.SPressed = false,
+                'q': () => KeyPressed.QPressed = false,
+                'd': () => KeyPressed.DPressed = false,
+                'o': () => KeyPressed.OPressed = false,
+                'l': () => KeyPressed.LPressed = false,
+                'k': () => KeyPressed.KPressed = false,
+                'm': () => KeyPressed.MPressed = false
             }
+            keyPressedSwitch[e.key]();
             amountPressed--;
             if (amountPressed === 0) {
                 emit("executeCommand", JSON.stringify(keyboardData));
