@@ -50,7 +50,7 @@ let navigate = (e) => {
             } else if (e.key == 'h') {
                 keyboardData.state = "flip right";
             }
-            emit("executeStick", JSON.stringify(keyboardData));
+            emit("executeCommand", JSON.stringify(keyboardData));
         }
     }
 };
@@ -74,42 +74,42 @@ let navigateDown = (e) => {
     if (keyboardChbx.checked) {
         if (e.key == 'z' && !KeyPressed.ZPressed) {
             keyboardData.state = "up";
-            emit("executeStick", JSON.stringify(keyboardData));
+            emit("executeCommand", JSON.stringify(keyboardData));
             KeyPressed.ZPressed = true;
             amountPressed++;
         } else if (e.key == 's' && !KeyPressed.SPressed) {
             keyboardData.state = "down";
-            emit("executeStick", JSON.stringify(keyboardData));
+            emit("executeCommand", JSON.stringify(keyboardData));
             KeyPressed.SPressed = true;
             amountPressed++;
         } else if (e.key == 'q' && !KeyPressed.QPressed) {
             keyboardData.state = "turn left";
-            emit("executeStick", JSON.stringify(keyboardData));
+            emit("executeCommand", JSON.stringify(keyboardData));
             KeyPressed.QPressed = true;
             amountPressed++;
         } else if (e.key == 'd' && !KeyPressed.DPressed) {
             keyboardData.state = "turn right";
-            emit("executeStick", JSON.stringify(keyboardData));
+            emit("executeCommand", JSON.stringify(keyboardData));
             KeyPressed.DPressed = true;
             amountPressed++;
         } else if (e.key == 'o' && !KeyPressed.OPressed) {
             keyboardData.state = "forward";
-            emit("executeStick", JSON.stringify(keyboardData));
+            emit("executeCommand", JSON.stringify(keyboardData));
             KeyPressed.OPressed = true;
             amountPressed++;
         } else if (e.key == 'l' && !KeyPressed.LPressed) {
             keyboardData.state = "backward";
-            emit("executeStick", JSON.stringify(keyboardData));
+            emit("executeCommand", JSON.stringify(keyboardData));
             KeyPressed.LPressed = true;
             amountPressed++;
         } else if (e.key == 'k' && !KeyPressed.KPressed) {
             keyboardData.state = "strafe left";
-            emit("executeStick", JSON.stringify(keyboardData));
+            emit("executeCommand", JSON.stringify(keyboardData));
             KeyPressed.KPressed = true;
             amountPressed++;
         } else if (e.key == 'm' && !KeyPressed.MPressed) {
             keyboardData.state = "strafe right";
-            emit("executeStick", JSON.stringify(keyboardData));
+            emit("executeCommand", JSON.stringify(keyboardData));
             KeyPressed.MPressed = true;
             amountPressed++;
         }
@@ -149,7 +149,7 @@ let navigateUp = (e) => {
             }
             amountPressed--;
             if (amountPressed == 0) {
-                emit("executeStick", JSON.stringify(keyboardData));
+                emit("executeCommand", JSON.stringify(keyboardData));
             }
         }
     }
@@ -161,12 +161,12 @@ let takeoffLand = () => {
     if (takeoffLandBtn.innerHTML == "Takeoff") {
         data.state = "Take off"
         data.speed = 0;
-        emit("executeStick", JSON.stringify(data));
+        emit("executeCommand", JSON.stringify(data));
         takeoffLandBtn.innerHTML = "Land";
     } else {
         data.state = "Land";
         data.speed = 0;
-        emit("executeStick", JSON.stringify(data));
+        emit("executeCommand", JSON.stringify(data));
         takeoffLandBtn.innerHTML = "Takeoff";
     }
 };
@@ -200,14 +200,14 @@ let startLeftJoystick = () => {
                 data.speed = 1
             }
         
-            emit("executeStick", JSON.stringify(data));
+            emit("executeCommand", JSON.stringify(data));
             sentNeutral = false;
 
         } else {
             if (!sentNeutral) {
                 data.state = "hover";
                 data.speed = 0;
-                emit("executeStick", JSON.stringify(data));
+                emit("executeCommand", JSON.stringify(data));
                 sentNeutral = true;
             }
         }
@@ -245,14 +245,14 @@ let startRightJoystick = () => {
                 data.speed = 1
             }
         
-            emit("executeStick", JSON.stringify(data));
+            emit("executeCommand", JSON.stringify(data));
             sentNeutral = false;
 
         } else {
             if (!sentNeutral) {
                 data.state = "hover";
                 data.speed = 0;
-                emit("executeStick", JSON.stringify(data));
+                emit("executeCommand", JSON.stringify(data));
                 sentNeutral = true;
             }
         }
