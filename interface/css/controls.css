@@ -40,6 +40,9 @@ main > div > div:first-child {
     height: 6.5vw;
     width: 6.5vw;
     margin-bottom: 1vh;
+    background-color: #EEEEEE;
+    color: #BBBBBB;
+    border: 1px solid #BBBBBB;
 }
 
 #setup > div {

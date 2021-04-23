@@ -31,7 +31,7 @@ let navigate = (e) => {
     if (keyboardChbx.checked) {
         if (e.key == ' ') {
             if (!flying) {
-                keyboardData.state = "Takeoff";
+                keyboardData.state = "Take off";
                 keyboardData.speed = 0;
                 emit("executeStick", JSON.stringify(keyboardData));
                 flying = true;
@@ -58,35 +58,35 @@ let navigateDown = (e) => {
     keyboardData.speed = keyboardSpeed;
     if (keyboardChbx.checked) {
         if (e.key == 'z' && !ZPressed) {
-            keyboardData.state = "LeftStickUp";
+            keyboardData.state = "Up";
             emit("executeStick", JSON.stringify(keyboardData));
             ZPressed = true;
         } else if (e.key == 's' && !SPressed) {
-            keyboardData.state = "LeftStickDown";
+            keyboardData.state = "Down";
             emit("executeStick", JSON.stringify(keyboardData));
             SPressed = true;
         } else if (e.key == 'q' && !QPressed) {
-            keyboardData.state = "LeftStickLeft";
+            keyboardData.state = "Turn left";
             emit("executeStick", JSON.stringify(keyboardData));
             QPressed = true;
         } else if (e.key == 'd' && !DPressed) {
-            keyboardData.state = "LeftStickRight";
+            keyboardData.state = "Turn left";
             emit("executeStick", JSON.stringify(keyboardData));
             DPressed = true;
         } else if (e.key == 'o' && !OPressed) {
-            keyboardData.state = "RightStickUp";
+            keyboardData.state = "Turn right";
             emit("executeStick", JSON.stringify(keyboardData));
             OPressed = true;
         } else if (e.key == 'l' && !LPressed) {
-            keyboardData.state = "RightStickDown";
+            keyboardData.state = "Backward";
             emit("executeStick", JSON.stringify(keyboardData));
             LPressed = true;
         } else if (e.key == 'k' && !KPressed) {
-            keyboardData.state = "RightStickLeft";
+            keyboardData.state = "Left";
             emit("executeStick", JSON.stringify(keyboardData));
             KPressed = true;
         } else if (e.key == 'm' && !MPressed) {
-            keyboardData.state = "RightStickRight";
+            keyboardData.state = "Right";
             emit("executeStick", JSON.stringify(keyboardData));
             MPressed = true;
         }
@@ -95,7 +95,7 @@ let navigateDown = (e) => {
 
 let navigateUp = (e) => {
     keyboardData.speed = 0;
-    keyboardData.state = "StickNeutral";
+    keyboardData.state = "Hover";
     if (keyboardChbx.checked) {
         if (e.key == 'z' || e.key == 's' || e.key == 'q' || e.key == 'd' || e.key == 'o' || e.key == 'l' || e.key == 'k' || e.key == 'm') {
             switch (e.key) {
@@ -133,7 +133,7 @@ let navigateUp = (e) => {
 let takeoffLand = () => {
     let data = new Object();
     if (takeoffLandBtn.innerHTML == "Takeoff") {
-        data.state = "Takeoff"
+        data.state = "Take off"
         data.speed = 0;
         emit("executeStick", JSON.stringify(data));
         takeoffLandBtn.innerHTML = "Land";
@@ -155,18 +155,18 @@ let startLeftJoystick = () => {
         let y = Joy1.GetY();
         let data = new Object();
     
-        if (x != 0 || y != 0) {
-            if (y > 0 && y >= Math.abs(x)) {
-                data.state = "LeftStickUp";
+        if (x != 0 && y != 0) {
+            if (y > 0 && y > Math.abs(x)) {
+                data.state = "up";
                 data.speed = y / 100;
-            } else if (y < 0 && Math.abs(y) >= Math.abs(x)) {
-                data.state = "LeftStickDown";
+            } else if (y < 0 && Math.abs(y) > Math.abs(x)) {
+                data.state = "down";
                 data.speed = y / 100 * -1;
-            } else if (x > 0 && x >= Math.abs(y)) {
-                data.state = "LeftStickRight";
+            } else if (x > 0 && x > Math.abs(y)) {
+                data.state = "turn right";
                 data.speed = x / 100;
-            } else if (x < 0 && Math.abs(x) >= Math.abs(y)) {
-                data.state = "LeftStickLeft";
+            } else if (x < 0 && Math.abs(x) > Math.abs(y)) {
+                data.state = "turn left";
                 data.speed = x / 100 * -1;
             }
 
@@ -179,7 +179,7 @@ let startLeftJoystick = () => {
 
         } else {
             if (!sentNeutral) {
-                data.state = "StickNeutral";
+                data.state = "hover";
                 data.speed = 0;
                 emit("executeStick", JSON.stringify(data));
                 sentNeutral = true;
@@ -196,20 +196,24 @@ let startRightJoystick = () => {
         let y = Joy2.GetY();
         let data = new Object();
     
-        if (x != 0 || y != 0) {
-            if (y > 0 && y >= Math.abs(x)) {
-                data.state = "RightStickUp";
+        if (x!= 0 || y != 0) {
+            if (y > 0 && y > Math.abs(x)) {
+                data.state = "forward";
                 data.speed = y / 100;
-            } else if (y < 0 && Math.abs(y) >= Math.abs(x)) {
-                data.state = "RightStickDown";
+            } else if (y < 0 && Math.abs(y) > Math.abs(x)) {
+                data.state = "backward";
                 data.speed = y / 100 * -1;
-            } else if (x > 0 && x >= Math.abs(y)) {
-                data.state = "RightStickRight";
+            } else if (x > 0 && x > Math.abs(y)) {
+                data.state = "right";
                 data.speed = x / 100;
-            } else if (x < 0 && Math.abs(x) >= Math.abs(y)) {
-                data.state = "RightStickLeft";
+            } else if (x < 0 && Math.abs(x) > Math.abs(y)) {
+                data.state = "left";
                 data.speed = x / 100 * -1;
-            }
+            } else {
+                data.state = "hover";
+                data.speed = 0;
+            }    
+        
 
             if (data.speed > 1) {
                 data.speed = 1
@@ -220,7 +224,7 @@ let startRightJoystick = () => {
 
         } else {
             if (!sentNeutral) {
-                data.state = "StickNeutral";
+                data.state = "hover";
                 data.speed = 0;
                 emit("executeStick", JSON.stringify(data));
                 sentNeutral = true;
