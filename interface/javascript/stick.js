@@ -33,12 +33,12 @@ let navigate = (e) => {
             if (!flying) {
                 keyboardData.state = "Take off";
                 keyboardData.speed = 0;
-                emit("executeStick", JSON.stringify(keyboardData));
+                emit("executeCommand", JSON.stringify(keyboardData));
                 flying = true;
             } else {
                 keyboardData.state = "Land";
                 keyboardData.speed = 0;
-                emit("executeStick", JSON.stringify(keyboardData));
+                emit("executeCommand", JSON.stringify(keyboardData));
                 flying = false;
             }
         }

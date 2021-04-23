@@ -19,14 +19,14 @@ server.on('error', onError);
 
 function acceptConnection(socket) {
     console.log("Connection received ...");
-    socket.on('execute', (msg) => {
-        droneManager.execute(msg);
+    socket.on('executeSequence', (msg) => {
+        droneManager.executeSequence(msg);
     });
     socket.on('abort', () => {
         droneManager.abort();
     });
-    socket.on('executeStick', (msg) => {
-       droneManager.executeStick(msg);
+    socket.on('executeCommand', (msg) => {
+       droneManager.executeCommand(msg);
     });
 }
 
