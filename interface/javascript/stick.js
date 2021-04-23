@@ -67,6 +67,7 @@ let KeyPressed = {
 };
 
 const possibleKeys = ['z', 's', 'q', 'd', 'o', 'l', 'k', 'm'];
+let amountPressed = 0;
 
 let navigateDown = (e) => {
     keyboardData.speed = keyboardSpeed;
@@ -75,34 +76,42 @@ let navigateDown = (e) => {
             keyboardData.state = "up";
             emit("executeStick", JSON.stringify(keyboardData));
             KeyPressed.ZPressed = true;
+            amountPressed++;
         } else if (e.key == 's' && !KeyPressed.SPressed) {
             keyboardData.state = "down";
             emit("executeStick", JSON.stringify(keyboardData));
             KeyPressed.SPressed = true;
+            amountPressed++;
         } else if (e.key == 'q' && !KeyPressed.QPressed) {
             keyboardData.state = "turn left";
             emit("executeStick", JSON.stringify(keyboardData));
             KeyPressed.QPressed = true;
+            amountPressed++;
         } else if (e.key == 'd' && !KeyPressed.DPressed) {
             keyboardData.state = "turn right";
             emit("executeStick", JSON.stringify(keyboardData));
             KeyPressed.DPressed = true;
+            amountPressed++;
         } else if (e.key == 'o' && !KeyPressed.OPressed) {
             keyboardData.state = "forward";
             emit("executeStick", JSON.stringify(keyboardData));
             KeyPressed.OPressed = true;
+            amountPressed++;
         } else if (e.key == 'l' && !KeyPressed.LPressed) {
             keyboardData.state = "backward";
             emit("executeStick", JSON.stringify(keyboardData));
             KeyPressed.LPressed = true;
+            amountPressed++;
         } else if (e.key == 'k' && !KeyPressed.KPressed) {
             keyboardData.state = "strafe left";
             emit("executeStick", JSON.stringify(keyboardData));
             KeyPressed.KPressed = true;
+            amountPressed++;
         } else if (e.key == 'm' && !KeyPressed.MPressed) {
             keyboardData.state = "strafe right";
             emit("executeStick", JSON.stringify(keyboardData));
             KeyPressed.MPressed = true;
+            amountPressed++;
         }
     }
 };
@@ -138,7 +147,10 @@ let navigateUp = (e) => {
                     KeyPressed.MPressed = false;
                     break;
             }
-            emit("executeStick", JSON.stringify(keyboardData));
+            amountPressed--;
+            if (amountPressed == 0) {
+                emit("executeStick", JSON.stringify(keyboardData));
+            }
         }
     }
 };
