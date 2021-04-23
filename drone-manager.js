@@ -34,10 +34,10 @@ function create() {
         if (withStick) {
             let stick = JSON.parse(msg);
             state = stick.state;
-            speed = stick.speed;
+            speed = validateParam(stick.speed);
         } else {
             state = msg.action;
-            speed = 0.2;
+            speed = DEFAULT_SPEED;
         }
 
 
