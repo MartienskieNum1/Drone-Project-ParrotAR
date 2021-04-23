@@ -45,50 +45,54 @@ let navigate = (e) => {
     }
 };
 
-let ZPressed = false;
-let SPressed = false;
-let QPressed = false;
-let DPressed = false;
-let OPressed = false;
-let LPressed = false;
-let KPressed = false;
-let MPressed = false;
+let KeyPressed = {
+    ZPressed: false,
+    SPressed: false,
+    QPressed: false,
+    DPressed: false,
+    OPressed: false,
+    LPressed: false,
+    KPressed: false,
+    MPressed: false
+};
+
+const possibleKeys = ['z', 's', 'q', 'd', 'o', 'l', 'k', 'm'];
 
 let navigateDown = (e) => {
     keyboardData.speed = keyboardSpeed;
     if (keyboardChbx.checked) {
-        if (e.key == 'z' && !ZPressed) {
+        if (e.key == 'z' && !KeyPressed.ZPressed) {
             keyboardData.state = "Up";
             emit("executeStick", JSON.stringify(keyboardData));
-            ZPressed = true;
-        } else if (e.key == 's' && !SPressed) {
+            KeyPressed.ZPressed = true;
+        } else if (e.key == 's' && !KeyPressed.SPressed) {
             keyboardData.state = "Down";
             emit("executeStick", JSON.stringify(keyboardData));
-            SPressed = true;
-        } else if (e.key == 'q' && !QPressed) {
+            KeyPressed.SPressed = true;
+        } else if (e.key == 'q' && !KeyPressed.QPressed) {
             keyboardData.state = "Turn left";
             emit("executeStick", JSON.stringify(keyboardData));
-            QPressed = true;
-        } else if (e.key == 'd' && !DPressed) {
+            KeyPressed.QPressed = true;
+        } else if (e.key == 'd' && !KeyPressed.DPressed) {
             keyboardData.state = "Turn left";
             emit("executeStick", JSON.stringify(keyboardData));
-            DPressed = true;
-        } else if (e.key == 'o' && !OPressed) {
+            KeyPressed.DPressed = true;
+        } else if (e.key == 'o' && !KeyPressed.OPressed) {
             keyboardData.state = "Turn right";
             emit("executeStick", JSON.stringify(keyboardData));
-            OPressed = true;
-        } else if (e.key == 'l' && !LPressed) {
+            KeyPressed.OPressed = true;
+        } else if (e.key == 'l' && !KeyPressed.LPressed) {
             keyboardData.state = "Backward";
             emit("executeStick", JSON.stringify(keyboardData));
-            LPressed = true;
-        } else if (e.key == 'k' && !KPressed) {
+            KeyPressed.LPressed = true;
+        } else if (e.key == 'k' && !KeyPressed.KPressed) {
             keyboardData.state = "Left";
             emit("executeStick", JSON.stringify(keyboardData));
-            KPressed = true;
-        } else if (e.key == 'm' && !MPressed) {
+            KeyPressed.KPressed = true;
+        } else if (e.key == 'm' && !KeyPressed.MPressed) {
             keyboardData.state = "Right";
             emit("executeStick", JSON.stringify(keyboardData));
-            MPressed = true;
+            KeyPressed.MPressed = true;
         }
     }
 };
@@ -97,31 +101,31 @@ let navigateUp = (e) => {
     keyboardData.speed = 0;
     keyboardData.state = "Hover";
     if (keyboardChbx.checked) {
-        if (e.key == 'z' || e.key == 's' || e.key == 'q' || e.key == 'd' || e.key == 'o' || e.key == 'l' || e.key == 'k' || e.key == 'm') {
+        if (possibleKeys.includes(e.key)) {
             switch (e.key) {
                 case 'z':
-                    ZPressed = false;
+                    KeyPressed.ZPressed = false;
                     break;
                 case 's':
-                    SPressed = false;
+                    KeyPressed.SPressed = false;
                     break;
                 case 'q':
-                    QPressed = false;
+                    KeyPressed.QPressed = false;
                     break;
                 case 'd':
-                    DPressed = false;
+                    KeyPressed.DPressed = false;
                     break;
                 case 'o':
-                    OPressed = false;
+                    KeyPressed.OPressed = false;
                     break;
                 case 'l':
-                    LPressed = false;
+                    KeyPressed.LPressed = false;
                     break;
                 case 'k':
-                    KPressed = false;
+                    KeyPressed.KPressed = false;
                     break;
                 case 'm':
-                    MPressed = false;
+                    KeyPressed.MPressed = false;
                     break;
             }
             emit("executeStick", JSON.stringify(keyboardData));
