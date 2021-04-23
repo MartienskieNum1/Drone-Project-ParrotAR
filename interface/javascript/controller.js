@@ -58,17 +58,24 @@ function execute() {
     if (actions.length > 0) {
 
         if ( (window.location.href).includes("index") ) {
-            document.querySelector("#abort").style.display = "inherit"
             document.querySelector("#sequence").innerHTML = ``;
         }
         
-        socket.emit('execute', JSON.stringify(actions));
+        socket.emit('executeSequence', JSON.stringify(actions));
 
         actions = [];
     }
 }
 
 function addAction(actionName, parameter = null) {
+    if (actionName === "FLIP") {
+        let randomNumber = Math.random();
+
+        actionName = randomNumber > 0.5 ?
+                        "Flip ahead" :
+                        "Flip behind"
+    }
+
     actions.push({
         action: actionName,
         param: parameter
@@ -77,6 +84,9 @@ function addAction(actionName, parameter = null) {
 
 function abort(e) {
     e.preventDefault();
+
+    document.querySelector("#sequence").innerHTML = ``;
+    actions = []
 
     socket.emit("abort", null);
 }
