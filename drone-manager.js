@@ -74,12 +74,12 @@ function create() {
                     console.log("backward", speed);
                     client.back(speed);
                     break;
-                case "strafe left":
-                    console.log("strafe left", speed);
+                case "left":
+                    console.log("left", speed);
                     client.left(speed);
                     break;
-                case "strafe right":
-                    console.log("strafe right", speed);
+                case "right":
+                    console.log("right", speed);
                     client.right(speed);
                     break;
                 case "stop":
