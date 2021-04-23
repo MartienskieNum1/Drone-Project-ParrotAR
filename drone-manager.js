@@ -34,18 +34,6 @@ function create() {
                 await sleep(1000);
             
         };
-
-        /*
-        mission.run(function (err, result) {
-            if (err) {
-                console.log("Error; landing drone...", err);
-                mission.client().stop();
-                mission.client().land();
-            } else {
-                console.log("Mission completed");
-            }
-        })
-        */
     }
 
     function abort() {
@@ -70,39 +58,39 @@ function create() {
         if (speed >= 0 && speed <= 1) {
             switch (state.toLowerCase()) {
                 case "up":
-                    console.log("up");
+                    console.log("up", speed);
                     client.up(speed);
                     break;
                 case "down":
-                    console.log("down");
+                    console.log("down", speed);
                     client.down(speed);
                     break;
                 case "turn left":
-                    console.log("turn left");
+                    console.log("turn left", speed);
                     client.counterClockwise(speed);
                     break;
                 case "turn right":
-                    console.log("turn right");
+                    console.log("turn right", speed);
                     client.clockwise(speed);
                     break;
                 case "forward":
-                    console.log("forward");
+                    console.log("forward", speed);
                     client.front(speed);
                     break;
                 case "backward":
-                    console.log("backward");
+                    console.log("backward", speed);
                     client.back(speed);
                     break;
-                case "left":
-                    console.log("left");
+                case "strafe left":
+                    console.log("strafe left", speed);
                     client.left(speed);
                     break;
-                case "right":
-                    console.log("right");
+                case "strafe right":
+                    console.log("strafe right", speed);
                     client.right(speed);
                     break;
-                case "hover":
-                    console.log("hover");
+                case "stop":
+                    console.log("stop", speed);
                     client.stop();
                     break;
                 case "take off":
@@ -113,6 +101,22 @@ function create() {
                     console.log("land");
                     client.stop();
                     client.land();
+                    break;
+                case "flip ahead":
+                    console.log("flip ahead");
+                    client.animate("flipAhead", 1000);
+                    break;
+                case "flip behind":
+                    console.log("flip behind");
+                    client.animate("flipBehind", 1000);
+                    break;
+                case "flip left":
+                    console.log("flip left");
+                    client.animate("flipLeft", 1000);
+                    break;
+                case "flip right":
+                    console.log("flip right");
+                    client.animate("flipRight", 1000);
                     break;
                 default:
                     console.error("Unexpected stick state: " + state);
