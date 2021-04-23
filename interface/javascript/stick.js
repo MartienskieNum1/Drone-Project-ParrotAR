@@ -2,7 +2,6 @@
 
 let socket;
 let takeoffLandBtn = document.querySelector("#takeoff-land");
-let gyroChbx = document.querySelector("#gyroscope");
 let keyboardChbx = document.querySelector("#keyboard");
 
 var Joy1 = new JoyStick('joy1Div');
@@ -24,7 +23,7 @@ document.addEventListener('DOMContentLoaded', init);
 
 // keyboard input
 let flying = false;
-let keyboardData = new Object();
+let keyboardData = {};
 let keyboardSpeed = 1;
 
 const possibleFunctionKeys = ['t', 'g', 'f', 'h', ' '];
@@ -33,7 +32,7 @@ let navigate = (e) => {
     keyboardData.speed = 0;
     if (keyboardChbx.checked) {
         if (possibleFunctionKeys.includes(e.key)) {
-            if (e.key == ' ') {
+            if (e.key === ' ') {
                 if (!flying) {
                     keyboardData.state = "take off";
                     flying = true;
@@ -41,13 +40,13 @@ let navigate = (e) => {
                     keyboardData.state = "land";
                     flying = false;
                 }
-            } else if (e.key == 't') {
+            } else if (e.key === 't') {
                 keyboardData.state = "flip ahead";
-            } else if (e.key == 'g') {
+            } else if (e.key === 'g') {
                 keyboardData.state = "flip behind";
-            } else if (e.key == 'f') {
+            } else if (e.key === 'f') {
                 keyboardData.state = "flip left";
-            } else if (e.key == 'h') {
+            } else if (e.key === 'h') {
                 keyboardData.state = "flip right";
             }
             emit("executeCommand", JSON.stringify(keyboardData));
@@ -72,42 +71,42 @@ let amountPressed = 0;
 let navigateDown = (e) => {
     keyboardData.speed = keyboardSpeed;
     if (keyboardChbx.checked) {
-        if (e.key == 'z' && !KeyPressed.ZPressed) {
+        if (e.key === 'z' && !KeyPressed.ZPressed) {
             keyboardData.state = "up";
             emit("executeCommand", JSON.stringify(keyboardData));
             KeyPressed.ZPressed = true;
             amountPressed++;
-        } else if (e.key == 's' && !KeyPressed.SPressed) {
+        } else if (e.key === 's' && !KeyPressed.SPressed) {
             keyboardData.state = "down";
             emit("executeCommand", JSON.stringify(keyboardData));
             KeyPressed.SPressed = true;
             amountPressed++;
-        } else if (e.key == 'q' && !KeyPressed.QPressed) {
+        } else if (e.key === 'q' && !KeyPressed.QPressed) {
             keyboardData.state = "turn left";
             emit("executeCommand", JSON.stringify(keyboardData));
             KeyPressed.QPressed = true;
             amountPressed++;
-        } else if (e.key == 'd' && !KeyPressed.DPressed) {
+        } else if (e.key === 'd' && !KeyPressed.DPressed) {
             keyboardData.state = "turn right";
             emit("executeCommand", JSON.stringify(keyboardData));
             KeyPressed.DPressed = true;
             amountPressed++;
-        } else if (e.key == 'o' && !KeyPressed.OPressed) {
+        } else if (e.key === 'o' && !KeyPressed.OPressed) {
             keyboardData.state = "forward";
             emit("executeCommand", JSON.stringify(keyboardData));
             KeyPressed.OPressed = true;
             amountPressed++;
-        } else if (e.key == 'l' && !KeyPressed.LPressed) {
+        } else if (e.key === 'l' && !KeyPressed.LPressed) {
             keyboardData.state = "backward";
             emit("executeCommand", JSON.stringify(keyboardData));
             KeyPressed.LPressed = true;
             amountPressed++;
-        } else if (e.key == 'k' && !KeyPressed.KPressed) {
+        } else if (e.key === 'k' && !KeyPressed.KPressed) {
             keyboardData.state = "strafe left";
             emit("executeCommand", JSON.stringify(keyboardData));
             KeyPressed.KPressed = true;
             amountPressed++;
-        } else if (e.key == 'm' && !KeyPressed.MPressed) {
+        } else if (e.key === 'm' && !KeyPressed.MPressed) {
             keyboardData.state = "strafe right";
             emit("executeCommand", JSON.stringify(keyboardData));
             KeyPressed.MPressed = true;
@@ -148,7 +147,7 @@ let navigateUp = (e) => {
                     break;
             }
             amountPressed--;
-            if (amountPressed == 0) {
+            if (amountPressed === 0) {
                 emit("executeCommand", JSON.stringify(keyboardData));
             }
         }
@@ -157,8 +156,8 @@ let navigateUp = (e) => {
 
 // takeoff-land
 let takeoffLand = () => {
-    let data = new Object();
-    if (takeoffLandBtn.innerHTML == "Takeoff") {
+    let data = {};
+    if (takeoffLandBtn.innerHTML === "Takeoff") {
         data.state = "Take off"
         data.speed = 0;
         emit("executeCommand", JSON.stringify(data));
@@ -179,9 +178,9 @@ let startLeftJoystick = () => {
     setInterval(function () {
         let x = Joy1.GetX();
         let y = Joy1.GetY();
-        let data = new Object();
+        let data = {};
     
-        if (x != 0 && y != 0) {
+        if (x !== 0 && y !== 0) {
             if (y > 0 && y > Math.abs(x)) {
                 data.state = "up";
                 data.speed = y / 100;
@@ -220,9 +219,9 @@ let startRightJoystick = () => {
     setInterval(function () {
         let x = Joy2.GetX();
         let y = Joy2.GetY();
-        let data = new Object();
+        let data = {};
     
-        if (x!= 0 || y != 0) {
+        if (x!== 0 || y !== 0) {
             if (y > 0 && y > Math.abs(x)) {
                 data.state = "forward";
                 data.speed = y / 100;
