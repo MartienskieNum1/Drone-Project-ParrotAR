@@ -18,11 +18,24 @@ function create() {
         return mission;
     }
 
-    function execute(msg) {
-        const mission = parseSequence(msg);
-        console.log(mission);
-        console.log("Executing mission...");
+    function sleep(ms) {
+        return new Promise(resolve => setTimeout(resolve, ms));
+    }
 
+    async function execute(msg) {
+        let actions = JSON.parse(msg);
+
+        for (const element of actions) {
+                for (let index = 0; index < 10; index++) {
+                    executeStick(element, false); 
+                    await sleep(100);
+                }
+                client.stop();
+                await sleep(1000);
+            
+        };
+
+        /*
         mission.run(function (err, result) {
             if (err) {
                 console.log("Error; landing drone...", err);
@@ -32,6 +45,7 @@ function create() {
                 console.log("Mission completed");
             }
         })
+        */
     }
 
     function abort() {
@@ -39,54 +53,74 @@ function create() {
         client.stop();
     }
 
-    function executeStick(msg) {
-        let stick = JSON.parse(msg);
-        console.log("incoming");
+    function executeStick(msg, withStick = true) {
+        let state;
+        let speed;
 
-        if (stick.speed >= 0 && stick.speed <= 1) {
-            switch (stick.state) {
-                case "LeftStickUp":
-                    client.up(stick.speed);
-                    client.after(500, () => client.stop());
+        if (withStick) {
+            let stick = JSON.parse(msg);
+            state = stick.state;
+            speed = stick.speed;
+        } else {
+            state = msg.action;
+            speed = 0.2;
+        }
+
+
+        if (speed >= 0 && speed <= 1) {
+            switch (state.toLowerCase()) {
+                case "up":
+                    console.log("up");
+                    client.up(speed);
                     break;
-                case "LeftStickDown":
-                    client.down(stick.speed);
-                    client.after(500, () => client.stop());
+                case "down":
+                    console.log("down");
+                    client.down(speed);
                     break;
-                case "LeftStickLeft":
-                    client.counterClockwise(stick.speed);
-                    client.after(500, () => client.stop());
+                case "turn left":
+                    console.log("turn left");
+                    client.counterClockwise(speed);
                     break;
-                case "LeftStickRight":
-                    client.clockwise(stick.speed);
-                    client.after(500, () => client.stop());
+                case "turn right":
+                    console.log("turn right");
+                    client.clockwise(speed);
                     break;
-                case "RightStickUp":
-                    client.front(stick.speed);
-                    client.after(500, () => client.stop());
+                case "forward":
+                    console.log("forward");
+                    client.front(speed);
                     break;
-                case "RightStickDown":
-                    client.back(stick.speed);
-                    client.after(500, () => client.stop());
+                case "backward":
+                    console.log("backward");
+                    client.back(speed);
                     break;
-                case "RightStickLeft":
-                    client.left(stick.speed);
-                    client.after(500, () => client.stop());
+                case "left":
+                    console.log("left");
+                    client.left(speed);
                     break;
-                case "RightStickRight":
-                    client.right(stick.speed);
-                    client.after(500, () => client.stop());
+                case "right":
+                    console.log("right");
+                    client.right(speed);
                     break;
-                case "StickNeutral":
+                case "hover":
+                    console.log("hover");
                     client.stop();
                     break;
+                case "take off":
+                    console.log("takeoff");
+                    client.takeoff();
+                    break;
+                case "land":
+                    console.log("land");
+                    client.stop();
+                    client.land();
+                    break;
                 default:
-                    console.error("Unexpected stick state: " + stick.state);
+                    console.error("Unexpected stick state: " + state);
                     client.stop();
                     break;
             }
         } else {
-            console.error("Unexpected speed value: " + stick.speed);
+            console.error("Unexpected speed value: " + speed);
             client.stop();
         }
 

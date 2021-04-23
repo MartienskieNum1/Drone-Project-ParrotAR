@@ -7,6 +7,7 @@
     <title>Manual stick</title>
     <link rel="stylesheet" href="css/reset.css">
     <link rel="stylesheet" href="css/general.css">
+    <link rel="stylesheet" href="css/stick.css">
 </head>
 <body>
     
@@ -21,15 +22,26 @@
 </header>
 
 <main>
-		<!-- Example of two JoyStick integrated in the page structure -->
-			<div class="columnLateral">
-				<div id="joy1Div" style="width:200px;height:200px;margin:50px"></div>
-				Posizione X:<input id="joy1PosizioneX" type="text" /><br />
-				Posizione Y:<input id="joy1PosizioneY" type="text" /><br />
-				Direzione:<input id="joy1Direzione" type="text" /><br />
-				X :<input id="joy1X" type="text" /></br>
-				Y :<input id="joy1Y" type="text" />
-			</div>		
+    <div>
+        <div class="joystick" id="joy1Div"></div>
+    </div>
+    <div class="functionalities">
+        <div class="gyroscope">
+            <input type="checkbox" id="gyroscope" name="gyroscope" value="gyroscope" />
+            <label for="gyroscope">Use gyroscope</label>
+        </div>
+
+        <div class="keyboard">
+            <input type="checkbox" id="keyboard" name="keyboard" value="keyboard" />
+            <label for="keyboard">Use keyboard</label>
+        </div>
+    </div>
+    <div>
+        <button id="takeoff-land">Takeoff</button>
+    </div>
+    <div>
+        <div class="joystick" id="joy2Div"></div>
+    </div>
 </main>
 
 <script src="/socket.io/socket.io.js"></script>

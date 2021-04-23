@@ -1,0 +1,42 @@
+/*takeoff land*/
+button {
+    position: absolute;
+    font-size: 1.4em;
+    width: 26%;
+    height: 50px;
+    left: calc(50% - 13%);
+    bottom: 50px;
+    border-radius: 10px;
+}
+
+/*joysticks*/
+.joystick {
+    position: absolute;
+    width: 25vw;
+    height: 25vw;
+}
+
+#joy1Div {
+    bottom: 50px;
+    left: 20px;
+}
+
+#joy2Div {
+    bottom: 50px;
+    right: 20px;
+}
+
+/*functionalities*/
+.functionalities {
+    position: absolute;
+    top: 170px;
+    left: 50px;
+}
+
+.gyroscope {
+    margin-bottom: 15px;
+}
+
+input[type="checkbox"] {
+    transform: scale(2);
+}
