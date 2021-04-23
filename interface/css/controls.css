@@ -15,6 +15,7 @@ main > div > div:first-child {
 #controls {
     display: flex;
     justify-content: space-around;
+    height: 55%;
 }
 
 #horizontal, #vertical {
@@ -25,7 +26,7 @@ main > div > div:first-child {
 #horizontal>div, #vertical>div {
     display: flex;
     justify-content: space-around;
-    margin-bottom: -5%;
+    margin-bottom: -3%;
 }
 
 #flips {
@@ -34,15 +35,6 @@ main > div > div:first-child {
     justify-content: space-between;
     flex-direction: column;
     align-items: center;
-}
-
-#flips button {
-    height: 6.5vw;
-    width: 6.5vw;
-    margin-bottom: 1vh;
-    background-color: #EEEEEE;
-    color: #BBBBBB;
-    border: 1px solid #BBBBBB;
 }
 
 #setup > div {
@@ -60,11 +52,18 @@ main > div > div:first-child {
     width: 20%;
     height: 10vh;
     border-radius: 25px;
+    background-color: lightgreen;
+}
+
+#setup > div > button, #flips button {
+    width: 7rem;
+    height: 7rem;
+    margin-bottom: 1vh;
 }
 
 button {
-    width: 8vw;
-    height: 8vw;
+    width: 9rem;
+    height: 9rem;
     border: 1px solid black;
     border-radius: 50%;
     font-size: 1.5rem;
