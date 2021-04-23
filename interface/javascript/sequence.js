@@ -1,21 +1,18 @@
 'use strict';
-
 let socket;
 document.addEventListener('DOMContentLoaded', init);
 
 let actions = [];
-let parameters = [];
 
 function init() {
     socket = io();
+    setClickHandlers();
+}
 
-    let abortButton = document.querySelector("#abort") !== null ?
-                            document.querySelector("#abort") :
-                            document.querySelector("#premade-moves-abort")
-    
-    abortButton.addEventListener('click', abort)
-
-    document.querySelectorAll("#controls button, #setup > div button").forEach(button => button.addEventListener('click', addToSequence));
+function setClickHandlers() {
+    document.querySelector("#abort").addEventListener('click', abort);
+    document.querySelectorAll("#controls button, #setup > div button")
+        .forEach(button => button.addEventListener('click', addToSequence));
     if ((window.location.href).includes("index")) {
         document.querySelector("#setup > button").addEventListener('click', execute);
     }
@@ -26,7 +23,7 @@ function addToSequence(e) {
 
     let sequenceList = document.querySelector("#sequence");
 
-    if ( ActionAvailable(e.target.innerText) ) {
+    if ( actionAvailable(e.target.innerText) ) {
         addAction(e.target.innerText, null)
         
         sequenceList.innerHTML += `<li data-id="${actions.length-1}">${e.target.innerText}</li>`
@@ -37,7 +34,7 @@ function addToSequence(e) {
     sequenceList.scrollTop = sequenceList.scrollHeight;
 }
 
-function ActionAvailable(actionName) {
+function actionAvailable(actionName) {
     if (actionName === "TAKE OFF" && actions.length > 0) {
         return actions[actions.length - 1].action === "LAND"
     } else if (actionName === "LAND" && actions.length > 0) {
@@ -45,7 +42,6 @@ function ActionAvailable(actionName) {
     } else {
         return true;
     }
-
 }
 
 function removeAction(e) {
@@ -73,20 +69,16 @@ function addAction(actionName, parameter = null) {
 
         actionName = randomNumber > 0.5 ?
                         "Flip ahead" :
-                        "Flip behind"
+                        "Flip behind";
     }
 
     actions.push({
         action: actionName,
         param: parameter
-    })
+    });
 }
 
 function abort(e) {
     e.preventDefault();
-
-    document.querySelector("#sequence").innerHTML = ``;
-    actions = []
-
     socket.emit("abort", null);
 }
