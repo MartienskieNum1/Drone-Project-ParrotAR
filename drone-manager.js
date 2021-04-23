@@ -1,5 +1,4 @@
-const DEFAULT_METER = 1;
-const DEFAULT_DEGREE = 90;
+const DEFAULT_SPEED = 0.2;
 const arDrone = require('ar-drone');
 
 function create() {
@@ -101,20 +100,11 @@ function create() {
 
     }
 
-    function validateParamMeter(param){
-        param = param == null ? DEFAULT_METER : param;
+    function validateParam(param){
+        param = param == null ? DEFAULT_SPEED : param;
 
-        if(param > 50 || param < 0){
-            param = DEFAULT_METER;
-        }
-
-        return param;
-    }
-    function validateParamDegree(param){
-        param = param == null ? DEFAULT_DEGREE : param;
-
-        if(param > 360 || param < 0){
-            param = DEFAULT_DEGREE;
+        if(param > 1 || param < 0){
+            param = DEFAULT_SPEED;
         }
 
         return param;
