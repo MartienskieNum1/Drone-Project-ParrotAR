@@ -1,115 +1,115 @@
-const DEFAULT_SPEED = 0.2;
-const DEFAULT_ACTION_TIME = 1600;
-const DEFAULT_REST_TIME = 500;
+const DEFAULT_METER = 1;
+const DEFAULT_DEGREE = 90;
 const arDrone = require('ar-drone');
+const autonomy = require('ardrone-autonomy');
 
 function create() {
-    let abortFlag = false;
     const client = arDrone.createClient();
+
+    function parseSequence(msg) {
+        let mission = autonomy.createMission();
+
+        let actions = JSON.parse(msg);
+
+        for (const a of actions) {
+            appendMission(mission, a.action, a.param);
+        }
+
+        return mission;
+    }
 
     function sleep(ms) {
         return new Promise(resolve => setTimeout(resolve, ms));
     }
 
-    async function executeSequence(msg) {
+    async function execute(msg) {
         let actions = JSON.parse(msg);
 
         for (const element of actions) {
-            if(!abortFlag){
-                executeCommand(element, false);
-                if(element.action === 'TAKE OFF'){
-                    await sleep(3000);
+                for (let index = 0; index < 10; index++) {
+                    executeStick(element, false); 
+                    await sleep(100);
                 }
-                await sleep(DEFAULT_ACTION_TIME);
                 client.stop();
-                await sleep(DEFAULT_REST_TIME);
+                await sleep(1000);
+            
+        };
+
+        /*
+        mission.run(function (err, result) {
+            if (err) {
+                console.log("Error; landing drone...", err);
+                mission.client().stop();
+                mission.client().land();
+            } else {
+                console.log("Mission completed");
             }
-        }
-        abortFlag = false;
+        })
+        */
     }
 
     function abort() {
         console.log("Aborting mission...");
         client.stop();
-        abortFlag = true;
     }
 
-    function executeCommand(msg, withStick = true) {
+    function executeStick(msg, withStick = true) {
         let state;
         let speed;
 
         if (withStick) {
             let stick = JSON.parse(msg);
             state = stick.state;
-            speed = validateParam(stick.speed);
+            speed = stick.speed;
         } else {
             state = msg.action;
-            speed = DEFAULT_SPEED;
+            speed = 0.2;
         }
 
 
         if (speed >= 0 && speed <= 1) {
             switch (state.toLowerCase()) {
                 case "up":
-                    console.log("up", speed);
                     client.up(speed);
+                    client.after(500, () => client.stop());
                     break;
                 case "down":
-                    console.log("down", speed);
                     client.down(speed);
+                    client.after(500, () => client.stop());
                     break;
                 case "turn left":
-                    console.log("turn left", speed);
                     client.counterClockwise(speed);
+                    client.after(500, () => client.stop());
                     break;
                 case "turn right":
-                    console.log("turn right", speed);
                     client.clockwise(speed);
+                    client.after(500, () => client.stop());
                     break;
                 case "forward":
-                    console.log("forward", speed);
                     client.front(speed);
+                    client.after(500, () => client.stop());
                     break;
                 case "backward":
-                    console.log("backward", speed);
                     client.back(speed);
+                    client.after(500, () => client.stop());
                     break;
-                case "strafe left":
-                    console.log("strafe left", speed);
+                case "left":
                     client.left(speed);
+                    client.after(500, () => client.stop());
                     break;
-                case "strafe right":
-                    console.log("strafe right", speed);
+                case "right":
                     client.right(speed);
+                    client.after(500, () => client.stop());
                     break;
-                case "stop":
-                    console.log("stop", speed);
+                case "hover":
                     client.stop();
                     break;
                 case "take off":
-                    console.log("takeoff");
                     client.takeoff();
                     break;
                 case "land":
-                    console.log("land");
                     client.stop();
                     client.land();
-                    break;
-                case "flip ahead":
-                    console.log("flip ahead");
-                    client.animate("flipAhead", 1000);
-                    break;
-                case "flip behind":
-                    console.log("flip behind");
-                    client.animate("flipBehind", 1000);
-                    break;
-                case "flip left":
-                    console.log("flip left");
-                    client.animate("flipLeft", 1000);
-                    break;
-                case "flip right":
-                    console.log("flip right");
-                    client.animate("flipRight", 1000);
                     break;
                 default:
                     console.error("Unexpected stick state: " + state);
@@ -123,17 +123,69 @@ function create() {
 
     }
 
-    function validateParam(param){
-        param = param == null ? DEFAULT_SPEED : param;
+    function appendMission(mission, action, param){
+        switch(action.toLowerCase()){
+            case "forward":
+                param = validateParamMeter(param);
+                mission.forward(param);
+                break;
+            case "backward":
+                param = validateParamMeter(param);
+                mission.backward(param);
+                break;
+            case "left":
+                param = validateParamMeter(param);
+                mission.left(param);
+                break;
+            case "right":
+                param = validateParamMeter(param);
+                mission.right(param);
+                break;
+            case "take off":
+                mission.takeoff();
+                break;
+            case "land":
+                mission.land();
+                break;
+            case "turn left":
+                param = validateParamDegree(param);
+                mission.ccw(param);
+                break;
+            case "turn right":
+                param = validateParamDegree(param);
+                mission.cw(param);
+                break;
+            case "up":
+                param = validateParamMeter(param);
+                mission.up(param);
+                break;
+            case "down":
+                param = validateParamMeter(param);
+                mission.down(param);
+                break;
+        }
+    }
 
-        if(param > 1 || param < 0){
-            param = DEFAULT_SPEED;
+    function validateParamMeter(param){
+        param = param == null ? DEFAULT_METER : param;
+
+        if(param > 50 || param < 0){
+            param = DEFAULT_METER;
+        }
+
+        return param;
+    }
+    function validateParamDegree(param){
+        param = param == null ? DEFAULT_DEGREE : param;
+
+        if(param > 360 || param < 0){
+            param = DEFAULT_DEGREE;
         }
 
         return param;
     }
 
-    return {executeSequence, abort, executeCommand};
+    return {execute, abort, executeStick};
 }
 
 module.exports = {create};
