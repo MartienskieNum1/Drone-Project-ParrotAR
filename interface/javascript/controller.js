@@ -58,7 +58,6 @@ function execute() {
     if (actions.length > 0) {
 
         if ( (window.location.href).includes("index") ) {
-            document.querySelector("#abort").style.display = "inherit"
             document.querySelector("#sequence").innerHTML = ``;
         }
         
@@ -77,6 +76,9 @@ function addAction(actionName, parameter = null) {
 
 function abort(e) {
     e.preventDefault();
+
+    document.querySelector("#sequence").innerHTML = ``;
+    actions = []
 
     socket.emit("abort", null);
 }
