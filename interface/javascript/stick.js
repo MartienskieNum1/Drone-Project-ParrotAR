@@ -62,35 +62,35 @@ let navigateDown = (e) => {
     keyboardData.speed = keyboardSpeed;
     if (keyboardChbx.checked) {
         if (e.key == 'z' && !KeyPressed.ZPressed) {
-            keyboardData.state = "Up";
+            keyboardData.state = "up";
             emit("executeStick", JSON.stringify(keyboardData));
             KeyPressed.ZPressed = true;
         } else if (e.key == 's' && !KeyPressed.SPressed) {
-            keyboardData.state = "Down";
+            keyboardData.state = "down";
             emit("executeStick", JSON.stringify(keyboardData));
             KeyPressed.SPressed = true;
         } else if (e.key == 'q' && !KeyPressed.QPressed) {
-            keyboardData.state = "Turn left";
+            keyboardData.state = "turn left";
             emit("executeStick", JSON.stringify(keyboardData));
             KeyPressed.QPressed = true;
         } else if (e.key == 'd' && !KeyPressed.DPressed) {
-            keyboardData.state = "Turn left";
+            keyboardData.state = "turn right";
             emit("executeStick", JSON.stringify(keyboardData));
             KeyPressed.DPressed = true;
         } else if (e.key == 'o' && !KeyPressed.OPressed) {
-            keyboardData.state = "Turn right";
+            keyboardData.state = "forward";
             emit("executeStick", JSON.stringify(keyboardData));
             KeyPressed.OPressed = true;
         } else if (e.key == 'l' && !KeyPressed.LPressed) {
-            keyboardData.state = "Backward";
+            keyboardData.state = "backward";
             emit("executeStick", JSON.stringify(keyboardData));
             KeyPressed.LPressed = true;
         } else if (e.key == 'k' && !KeyPressed.KPressed) {
-            keyboardData.state = "Left";
+            keyboardData.state = "strafe left";
             emit("executeStick", JSON.stringify(keyboardData));
             KeyPressed.KPressed = true;
         } else if (e.key == 'm' && !KeyPressed.MPressed) {
-            keyboardData.state = "Right";
+            keyboardData.state = "strafe right";
             emit("executeStick", JSON.stringify(keyboardData));
             KeyPressed.MPressed = true;
         }
@@ -99,7 +99,7 @@ let navigateDown = (e) => {
 
 let navigateUp = (e) => {
     keyboardData.speed = 0;
-    keyboardData.state = "Hover";
+    keyboardData.state = "hover";
     if (keyboardChbx.checked) {
         if (possibleKeys.includes(e.key)) {
             switch (e.key) {

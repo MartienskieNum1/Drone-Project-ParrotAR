@@ -94,11 +94,11 @@ function create() {
                     client.back(speed);
                     break;
                 case "left":
-                    console.log("left", speed);
+                    console.log("strafe left", speed);
                     client.left(speed);
                     break;
                 case "right":
-                    console.log("right", speed);
+                    console.log("strafe right", speed);
                     client.right(speed);
                     break;
                 case "hover":
