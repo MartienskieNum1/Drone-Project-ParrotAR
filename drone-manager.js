@@ -70,39 +70,39 @@ function create() {
         if (speed >= 0 && speed <= 1) {
             switch (state.toLowerCase()) {
                 case "up":
-                    console.log("up");
+                    console.log("up", speed);
                     client.up(speed);
                     break;
                 case "down":
-                    console.log("down");
+                    console.log("down", speed);
                     client.down(speed);
                     break;
                 case "turn left":
-                    console.log("turn left");
+                    console.log("turn left", speed);
                     client.counterClockwise(speed);
                     break;
                 case "turn right":
-                    console.log("turn right");
+                    console.log("turn right", speed);
                     client.clockwise(speed);
                     break;
                 case "forward":
-                    console.log("forward");
+                    console.log("forward", speed);
                     client.front(speed);
                     break;
                 case "backward":
-                    console.log("backward");
+                    console.log("backward", speed);
                     client.back(speed);
                     break;
                 case "left":
-                    console.log("left");
+                    console.log("left", speed);
                     client.left(speed);
                     break;
                 case "right":
-                    console.log("right");
+                    console.log("right", speed);
                     client.right(speed);
                     break;
                 case "hover":
-                    console.log("hover");
+                    console.log("hover", speed);
                     client.stop();
                     break;
                 case "take off":
