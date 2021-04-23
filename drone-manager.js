@@ -34,18 +34,6 @@ function create() {
                 await sleep(1000);
             
         };
-
-        /*
-        mission.run(function (err, result) {
-            if (err) {
-                console.log("Error; landing drone...", err);
-                mission.client().stop();
-                mission.client().land();
-            } else {
-                console.log("Mission completed");
-            }
-        })
-        */
     }
 
     function abort() {
@@ -93,11 +81,11 @@ function create() {
                     console.log("backward", speed);
                     client.back(speed);
                     break;
-                case "left":
+                case "strafe left":
                     console.log("strafe left", speed);
                     client.left(speed);
                     break;
-                case "right":
+                case "strafe right":
                     console.log("strafe right", speed);
                     client.right(speed);
                     break;
@@ -113,6 +101,22 @@ function create() {
                     console.log("land");
                     client.stop();
                     client.land();
+                    break;
+                case "flip ahead":
+                    console.log("flip ahead");
+                    client.animate("flipAhead", 1000);
+                    break;
+                case "flip behind":
+                    console.log("flip behind");
+                    client.animate("flipBehind", 1000);
+                    break;
+                case "flip left":
+                    console.log("flip left");
+                    client.animate("flipLeft", 1000);
+                    break;
+                case "flip right":
+                    console.log("flip right");
+                    client.animate("flipRight", 1000);
                     break;
                 default:
                     console.error("Unexpected stick state: " + state);

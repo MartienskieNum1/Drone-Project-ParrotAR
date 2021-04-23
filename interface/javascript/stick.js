@@ -27,20 +27,30 @@ let flying = false;
 let keyboardData = new Object();
 let keyboardSpeed = 1;
 
+const possibleFunctionKeys = ['t', 'g', 'f', 'h', ' '];
+
 let navigate = (e) => {
+    keyboardData.speed = 0;
     if (keyboardChbx.checked) {
-        if (e.key == ' ') {
-            if (!flying) {
-                keyboardData.state = "Take off";
-                keyboardData.speed = 0;
-                emit("executeStick", JSON.stringify(keyboardData));
-                flying = true;
-            } else {
-                keyboardData.state = "Land";
-                keyboardData.speed = 0;
-                emit("executeStick", JSON.stringify(keyboardData));
-                flying = false;
+        if (possibleFunctionKeys.includes(e.key)) {
+            if (e.key == ' ') {
+                if (!flying) {
+                    keyboardData.state = "take off";
+                    flying = true;
+                } else {
+                    keyboardData.state = "land";
+                    flying = false;
+                }
+            } else if (e.key == 't') {
+                keyboardData.state = "flip ahead";
+            } else if (e.key == 'g') {
+                keyboardData.state = "flip behind";
+            } else if (e.key == 'f') {
+                keyboardData.state = "flip left";
+            } else if (e.key == 'h') {
+                keyboardData.state = "flip right";
             }
+            emit("executeStick", JSON.stringify(keyboardData));
         }
     }
 };
